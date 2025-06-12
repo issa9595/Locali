@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="flex-1 max-w-[35%] text-center">
             <div className="flex justify-center mb-3">
               <img 
-                src="/src/assets/locali-logo.png" 
+                src="/assets/images/Logo/locali-logo.png" 
                 alt="Locali Logo" 
                 className="h-20 w-auto max-w-full"
               />

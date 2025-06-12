@@ -18,7 +18,7 @@ const WebHomepageValues = () => {
             <div className="flex justify-center mb-6">
               <div className="w-28 h-28 flex items-center justify-center">
                 <img 
-                  src="/src/assets/local-value.png" 
+                  src="/assets/images/Icones/local-value.png"
                   alt="Local" 
                   className="w-full h-full object-contain"
                 />
@@ -34,7 +34,7 @@ const WebHomepageValues = () => {
             <div className="flex justify-center mb-6">
               <div className="w-28 h-28 flex items-center justify-center">
                 <img 
-                  src="/src/assets/fiability-value.png" 
+                  src="/assets/images/Icones/Fiability-value.png" 
                   alt="Fiabilité" 
                   className="w-full h-full object-contain"
                 />
@@ -50,7 +50,7 @@ const WebHomepageValues = () => {
             <div className="flex justify-center mb-6">
               <div className="w-28 h-28 flex items-center justify-center">
                 <img 
-                  src="/src/assets/proximity-value.png" 
+                  src="/assets/images/Icones/Proximity-value.png" 
                   alt="Proximité" 
                   className="w-full h-full object-contain"
                 />

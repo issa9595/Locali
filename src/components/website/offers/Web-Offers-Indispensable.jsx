@@ -17,7 +17,7 @@ const WebOffersIndispensable = () => {
             {/* Image à gauche */}
             <div className="flex justify-center">
               <img 
-                src="/src/assets/Indispensable-image.png" 
+                src="/assets/images/GlobalPages/Indispensable-image.png" 
                 alt="Équipe au travail" 
                 className="w-full h-64 sm:h-72 md:h-80 lg:h-[28rem] object-cover rounded-lg shadow-lg"
               />

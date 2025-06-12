@@ -11,7 +11,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
               <img 
-                src="/src/assets/Locali-Logo-Header.png" 
+                src="/assets/images/Logo/Locali-Logo-Header.png" 
                 alt="Logo Locali" 
                 className="w-24 h-16 sm:w-28 sm:h-20 object-contain"
               />

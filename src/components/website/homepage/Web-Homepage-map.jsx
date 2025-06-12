@@ -19,7 +19,7 @@ const WebHomepageMap = () => {
             <div className="h-96 bg-gray-200 flex items-center justify-center">
               {/* Remplacez cette div par votre carte interactive */}
               <img 
-                src="/src/assets/map-image.png" 
+                src="/assets/images/Map/map-image.png" 
                 alt="Carte interactive" 
                 className="w-full h-full object-cover"
               />

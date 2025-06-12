@@ -3,34 +3,34 @@ import React from 'react';
 const Web_Interactive_Advantage = () => {
   const advantages = [
     {
-      image: "/src/assets/ICONE-Loupe.png",
+      image: "/assets/images/Icones/ICONE-Loupe.png",
       alt: "Analyse rapide",
       title: "Une analyse rapide, sans compétences techniques"
     },
     {
-      image: "/src/assets/ICONE-Valise.png",
+      image: "/assets/images/Icones/ICONE-Valise.png",
       alt: "Données utiles",
       title: "Des données utiles tout au long de votre projet"
     },
     {
-      image: "/src/assets/ICONE-Reseaux.png",
+      image: "/assets/images/Icones/ICONE-Reseaux.png",
       alt: "Données fiables",
       title: "Des données fiables"
     },
     {
-      image: "/src/assets/ICONE-Chrono.png",
+      image: "/assets/images/Icones/ICONE-Chrono.png",
       alt: "Temps gagné",
       title: "Moins de temps perdu"
     },
     {
-      image: "/src/assets/ICONE-PC.png",
+      image: "/assets/images/Icones/ICONE-PC.png",
       alt: "Outil visuel",
       title: "Un outil visuel et intuitif, accessible à tous"
     }
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-purple-100 to-gray-100">
+    <section className="py-16">
       <div className="container mx-auto px-4 max-w-6xl">
         <h2 className="text-4xl font-poppins-bold text-center text-locali-blue mb-16">
           Avantages

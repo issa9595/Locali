@@ -16,7 +16,7 @@ const WebHomepageOffers = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
             <div className="h-48 bg-gray-200">
               <img 
-                src="/src/assets/offers-image.png" 
+                src="/assets/images/GlobalPages/offers-image.png" 
                 alt="Carte Interactive" 
                 className="w-full h-full object-cover"
               />
@@ -40,7 +40,7 @@ const WebHomepageOffers = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
             <div className="h-48 bg-gray-200">
               <img 
-                src="/src/assets/offers-image.png" 
+                src="/assets/images/GlobalPages/offers-image.png" 
                 alt="Analyses Territoriales" 
                 className="w-full h-full object-cover"
               />
@@ -63,8 +63,8 @@ const WebHomepageOffers = () => {
           {/* Kit Entrepreneurs */}
           <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
             <div className="h-48 bg-gray-200">
-              <img 
-                src="/src/assets/offers-image.png" 
+              <img
+                src="/assets/images/GlobalPages/offers-image.png" 
                 alt="Kit Entrepreneurs" 
                 className="w-full h-full object-cover"
               />
