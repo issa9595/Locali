@@ -13,18 +13,20 @@ function AnalyticsPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Analyses Territoriales</h1>
+      <h1 className="text-2xl font-kallisto-bold mb-6 text-locali-text-primary">Analyses Territoriales</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Métriques disponibles</h2>
+          <h2 className="text-xl font-kallisto-light mb-4 text-locali-text-primary">Métriques disponibles</h2>
           <div className="space-y-2">
             {Object.entries(metrics).map(([key, label]) => (
               <button
                 key={key}
                 onClick={() => setSelectedMetric(key)}
-                className={`w-full p-3 text-left rounded ${
-                  selectedMetric === key ? 'bg-blue-100' : 'hover:bg-gray-100'
+                className={`w-full p-3 text-left rounded font-poppins-regular transition-colors ${
+                  selectedMetric === key 
+                    ? 'bg-locali-green/20 text-locali-green-dark border border-locali-green' 
+                    : 'hover:bg-locali-purple/10 text-locali-text-primary'
                 }`}
               >
                 {label}
@@ -34,12 +36,12 @@ function AnalyticsPage() {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-kallisto-light mb-4 text-locali-text-primary">
             {metrics[selectedMetric]}
           </h2>
-          <div className="h-64 flex items-center justify-center bg-gray-50 rounded">
+          <div className="h-64 flex items-center justify-center bg-locali-green-light/10 rounded border-2 border-dashed border-locali-green-light">
             {/* Ici viendra le composant de visualisation des données */}
-            <p className="text-gray-500">Visualisation des données à venir</p>
+            <p className="text-locali-text-secondary font-poppins-regular">Visualisation des données à venir</p>
           </div>
         </div>
       </div>
