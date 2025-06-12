@@ -6,7 +6,7 @@ const WebOffersHeroSection = () => {
       {/* Image de carte en arrière-plan */}
       <div className="absolute inset-0">
         <img 
-          src="/src/assets/World_map_with_points.png" 
+          src="/assets/images/Map/World_map_with_points.png" 
           alt="Carte interactive" 
           className="w-full h-full object-cover"
         />

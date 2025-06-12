@@ -17,7 +17,7 @@ const WebHomepageTeam = () => {
           {/* Image de l'équipe à gauche */}
           <div className="flex justify-center">
             <img 
-              src="/src/assets/team-image.png" 
+              src="/assets/images/GlobalPages/team-image.png" 
               alt="Notre équipe" 
               className="w-full h-auto object-cover rounded-lg shadow-lg"
             />

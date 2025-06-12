@@ -5,7 +5,7 @@ const WebInteractiveHeroSection = () => {
     <section 
       className="relative min-h-screen flex items-center justify-start bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url('/src/assets/Map-interactive.png')`
+        backgroundImage: `url('/assets/images/Map/Map-interactive.png')`
       }}
     >
       {/* Voile violet animé */}

@@ -2,7 +2,7 @@ import React from 'react'
 
 const WebInteractiveToworks = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-100">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-32 max-w-6xl">
         
         {/* Section Comment ça fonctionne */}
