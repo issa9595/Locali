@@ -1,1 +1,78 @@
 @import "tailwindcss";
+
+@theme {
+	--color-locali-blue: #12043e;
+	--color-locali-green: #6ab023;
+	--color-locali-green-light: #bae27a;
+	--color-locali-green-dark: #14190d;
+	--color-locali-purple: #c1add3;
+	--color-locali-purple-light: #E5DFEC;
+	--color-locali-purple-dark: #593998;
+	--color-locali-button-dark: #14190d;
+	--color-locali-button-hover: #12043e;
+	--color-locali-instagram: #593998;
+	--color-locali-facebook: #12043e;
+	--color-locali-linkedin: #593998;
+
+	--font-family-poppins: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+	--font-family-kallisto: 'Kallisto', ui-serif, Georgia, serif;
+}
+
+/* Classes personnalisées */
+@layer components {
+
+	/* Classes de polices */
+	.font-poppins-regular {
+		font-family: var(--font-family-poppins);
+		font-weight: 400;
+	}
+
+	.font-poppins-medium {
+		font-family: var(--font-family-poppins);
+		font-weight: 500;
+	}
+
+	.font-poppins-semibold {
+		font-family: var(--font-family-poppins);
+		font-weight: 600;
+	}
+
+	.font-poppins-bold {
+		font-family: var(--font-family-poppins);
+		font-weight: 700;
+	}
+
+	.font-poppins-light {
+		font-family: var(--font-family-poppins);
+		font-weight: 300;
+	}
+
+	.font-kallisto-regular {
+		font-family: var(--font-family-kallisto);
+		font-weight: 400;
+	}
+
+	.font-kallisto-bold {
+		font-family: var(--font-family-kallisto);
+		font-weight: 700;
+	}
+
+	/* Classes de boutons */
+	.btn-primary {
+		@apply bg-locali-blue hover:bg-white text-white hover:text-locali-blue px-6 py-2 rounded-md text-sm transition-all duration-300 ease-in-out;
+		font-family: var(--font-family-poppins);
+		font-weight: 500;
+	}
+
+	.btn-secondary {
+		@apply bg-locali-green hover:bg-locali-green-dark text-white px-6 py-2 rounded-md text-sm transition-all duration-300 ease-in-out;
+		font-family: var(--font-family-poppins);
+		font-weight: 500;
+	}
+
+	.btn-outline {
+		@apply border-2 border-locali-blue text-locali-blue hover:bg-locali-blue hover:text-white px-6 py-2 rounded-md text-sm transition-all duration-300 ease-in-out;
+		font-family: var(--font-family-poppins);
+		font-weight: 500;
+	}
+}
