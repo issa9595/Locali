@@ -6,6 +6,30 @@
 - [FIX]
 - [REFACTOR]
 
+## [1.0.1]
+
+### Ajouté
+- Page Analyses Territoriales complète (`/analyses`)
+- Hero section avec card interactive et image de fond
+- Section données interactives avec sélecteur de villes (Nantes + 7 autres)
+- Métriques premium avec modal d'abonnement (Entreprises par secteur, Population et ménages)
+- Section avantages avec 5 icônes et texte "Pourquoi l'utiliser ?"
+- Composants carte interactive avec hero section et avantages
+- Logo Locali dans le header avec taille optimisée
+
+### Modifié
+- Harmonisation des styles entre hero sections (taille cards, couleurs, polices)
+- Boutons alignés à droite dans toutes les cards
+- Couleurs cohérentes (fond violet, éléments blancs, badges premium)
+- Modal avec fond transparent flouté
+- Architecture atomique renforcée pour les analyses
+
+### Technique
+- Nouveaux composants : `Web-Analyses-*`, `Web-Interactive-*`
+- Données fictives Nantes pour démonstration
+- Système de métriques premium avec gestion d'état
+- Exports et imports organisés par dossiers
+
 
 ## [1.0.0]
 
