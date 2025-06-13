@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebOffersHeroSection = () => {
   return (
-    <section className="relative h-[70vh] sm:h-[80vh] md:h-screen bg-gray-100 overflow-hidden">
+    <section className="relative min-h-[60vh] sm:min-h-[80vh] md:min-h-screen bg-locali-background overflow-hidden bg-cover bg-center bg-no-repeat px-4 sm:px-8 flex items-center justify-center" >
       {/* Image de carte en arrière-plan */}
       <div className="absolute inset-0">
         <img 
@@ -10,12 +11,12 @@ const WebOffersHeroSection = () => {
           alt="Carte interactive" 
           className="w-full h-full object-cover"
         />
-                  {/* Voile transparent violet avec effets */}
-          <div className="absolute inset-0 bg-gradient-to-br from-locali-purple via-locali-purple-dark to-locali-purple opacity-70" style={{animation: 'pulse 3s ease-in-out infinite'}}></div>
+        {/* Voile transparent violet avec effets */}
+        <div className="absolute inset-0 bg-gradient-to-br from-locali-purple via-locali-purple-dark to-locali-purple opacity-70" style={{animation: 'pulse 3s ease-in-out infinite'}}></div>
       </div>
 
       {/* Encadré Best-seller */}
-      <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-8 md:px-16 lg:px-32">
+      <div className="relative z-10 flex items-center justify-center h-full w-full">
         <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
           <div className="bg-locali-blue rounded-xl p-4 sm:p-6 md:p-8 shadow-2xl border border-locali-blue">
             {/* Titre Best-seller */}
@@ -34,15 +35,16 @@ const WebOffersHeroSection = () => {
 
             {/* Bouton */}
             <div>
-              <button className="bg-locali-green hover:bg-locali-green-dark text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-sm sm:text-base w-full">
+              <Link
+                to="/carte"
+                className="bg-locali-green hover:bg-locali-green-dark text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-sm sm:text-base w-full"
+              >
                 Accéder à la carte interactive
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-
     </section>
   )
 }

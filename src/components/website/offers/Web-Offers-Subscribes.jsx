@@ -2,7 +2,7 @@ import React from 'react'
 
 const WebOffersSubscribes = () => {
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-locali-background">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Titre principal */}
         <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">

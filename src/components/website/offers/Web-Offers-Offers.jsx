@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebOffersOffers = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-locali-background">
       <div className="container mx-auto px-16 lg:px-32 text-justify">
         {/* Titre principal */}
         <div className="text-center mb-20">
@@ -24,9 +25,12 @@ const WebOffersOffers = () => {
               ou une ville en quelques clics.
             </p>
             <div>
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/carte"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
           <div className="bg-gray-300 rounded-lg h-64 flex items-center justify-center">
@@ -50,9 +54,12 @@ const WebOffersOffers = () => {
               décisions stratégiques, basées sur du concret.
             </p>
             <div className="text-right">
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/analyses"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -70,9 +77,12 @@ const WebOffersOffers = () => {
               sereinement, étape par étape.
             </p>
             <div>
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/kit-entrepreneur-page"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
           <div className="bg-gray-300 rounded-lg h-64 flex items-center justify-center">

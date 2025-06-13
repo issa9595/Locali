@@ -30,7 +30,7 @@ const Web_Interactive_Advantage = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-locali-background">
       <div className="container mx-auto px-4 max-w-6xl">
         <h2 className="text-4xl font-poppins-bold text-center text-locali-blue mb-16">
           Avantages

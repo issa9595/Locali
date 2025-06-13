@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebOffersIndispensable = () => {
   return (
-    <section className="py-12 sm:py-14 md:py-16">
+    <section className="py-12 sm:py-14 md:py-16 bg-locali-background">
       <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-32">
         <div className="bg-locali-purple-light rounded-[25px] border-2 border-gray-300 shadow-lg p-4 sm:p-6 md:p-8 lg:p-12 max-w-7xl mx-auto">
           {/* Titre principal */}
@@ -53,9 +54,12 @@ const WebOffersIndispensable = () => {
 
               {/* Bouton */}
               <div className="pt-4 sm:pt-5 md:pt-4 text-right">
-                <button className="bg-locali-green hover:bg-locali-green-dark text-white px-4 py-2 sm:px-6 sm:py-3 md:px-6 md:py-2 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-sm sm:text-base md:text-base">
+                <Link
+                  to="/notre-histoire"
+                  className="bg-locali-green hover:bg-locali-green-dark text-white px-4 py-2 sm:px-6 sm:py-3 md:px-6 md:py-2 rounded-lg font-poppins-medium transition-all duration-300 ease-in-out text-sm sm:text-base md:text-base"
+                >
                   Nous connaître
-                </button>
+                </Link>
               </div>
             </div>
           </div>
