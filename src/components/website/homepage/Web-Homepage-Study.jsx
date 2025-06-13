@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebHomepageStudy = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-locali-background">
       <div className="container mx-auto px-16 lg:px-32">
         {/* Titre principal */}
         <div className="text-center mb-20">
@@ -24,9 +25,12 @@ const WebHomepageStudy = () => {
               concurrentielle efficace, directement depuis notre interface.
             </p>
             <div>
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/offres"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
           <div></div> {/* Espace vide à droite */}
@@ -46,9 +50,12 @@ const WebHomepageStudy = () => {
               fiables, idéales pour une étude de marché ou un ciblage précis.
             </p>
             <div className="text-right">
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/offres"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -67,9 +74,12 @@ const WebHomepageStudy = () => {
               on s'occupe du reste.
             </p>
             <div>
-              <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg">
+              <Link
+                to="/offres"
+                className="bg-locali-purple hover:bg-locali-purple-dark text-white px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-lg"
+              >
                 En savoir plus
-              </button>
+              </Link>
             </div>
           </div>
           <div></div> {/* Espace vide à droite */}

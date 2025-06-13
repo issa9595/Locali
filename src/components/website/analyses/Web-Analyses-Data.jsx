@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Web_Analyses_Data = () => {
   const [selectedMetric, setSelectedMetric] = useState('Revenus médians');
@@ -94,7 +95,10 @@ const Web_Analyses_Data = () => {
   };
 
   return (
-    <section className="py-16 ">
+    <section className="py-16 bg-locali-background">
+      <h2 className="text-4xl md:text-5xl font-kallisto-bold text-locali-blue text-center mb-8">
+        Analyses territoriales
+      </h2>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="bg-locali-purple-light rounded-3xl p-8 lg:p-12">
@@ -130,9 +134,12 @@ const Web_Analyses_Data = () => {
                 </div>
                 
                 {/* Bouton "Plus de données" */}
-                <button className="mt-6 bg-locali-purple-dark text-white px-6 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors">
+                <Link
+                  to="/abonnement"
+                  className="mt-6 bg-locali-purple-dark text-white px-6 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors"
+                >
                   Plus de données
-                </button>
+                </Link>
               </div>
 
               {/* Visualisation des données - Colonne droite */}

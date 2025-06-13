@@ -1,8 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+  const accountMenuRef = useRef(null)
+
+  // Fermer le menu compte si on clique ailleurs
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setIsAccountMenuOpen(false)
+      }
+    }
+    if (isAccountMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isAccountMenuOpen])
+
   return (
     <header className="bg-white shadow-sm relative">
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
@@ -33,7 +53,7 @@ const Header = () => {
               Analyses territoriales
             </Link>
             <Link 
-              to="/kit-entrepreneur" 
+              to="/kit-entrepreneur-page" 
               className="text-locali-text-primary hover:text-locali-green font-poppins-medium transition-colors text-xs lg:text-sm xl:text-base whitespace-nowrap"
             >
               Kit de l'entrepreneur
@@ -44,22 +64,49 @@ const Header = () => {
             >
               Nos offres
             </Link>
-            <a 
-              href="#" 
+            <Link 
+              to="/notre-histoire" 
               className="text-locali-text-primary hover:text-locali-green font-poppins-medium transition-colors text-xs lg:text-sm xl:text-base whitespace-nowrap"
             >
               Notre Histoire
-            </a>
+            </Link>
           </div>
 
           {/* Boutons à droite - Desktop seulement */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3">
-            <button className="bg-white border border-locali-purple-dark text-locali-purple-dark px-1 py-1 lg:px-2 xl:px-3 lg:py-2 rounded-md font-poppins-medium hover:bg-locali-purple/10 transition-colors text-xs xl:text-sm whitespace-nowrap">
-              Votre compte
-            </button>
-            <button className="bg-locali-button-dark text-white px-1 py-1 lg:px-2 xl:px-3 lg:py-2 rounded-md font-poppins-medium hover:bg-locali-button-hover transition-colors text-xs xl:text-sm whitespace-nowrap">
+            {/* Menu déroulant compte */}
+            <div className="relative" ref={accountMenuRef}>
+              <button
+                onClick={() => setIsAccountMenuOpen((open) => !open)}
+                className="bg-white border border-locali-purple-dark text-locali-purple-dark px-1 py-1 lg:px-2 xl:px-3 lg:py-2 rounded-md font-poppins-medium hover:bg-locali-purple/10 transition-colors text-xs xl:text-sm whitespace-nowrap"
+              >
+                Votre compte
+              </button>
+              {isAccountMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-fade-in">
+                  <Link
+                    to="/connexion"
+                    className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-t-lg transition-colors"
+                    onClick={() => setIsAccountMenuOpen(false)}
+                  >
+                    Se connecter
+                  </Link>
+                  <Link
+                    to="/inscription"
+                    className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-b-lg transition-colors"
+                    onClick={() => setIsAccountMenuOpen(false)}
+                  >
+                    S'inscrire
+                  </Link>
+                </div>
+              )}
+            </div>
+            <Link 
+              to="/contact" 
+              className="bg-locali-button-dark text-white px-1 py-1 lg:px-2 xl:px-3 lg:py-2 rounded-md font-poppins-medium hover:bg-locali-button-hover transition-colors text-xs xl:text-sm whitespace-nowrap inline-block"
+            >
               Contact
-            </button>
+            </Link>
           </div>
 
           {/* Bouton menu mobile */}
@@ -100,7 +147,7 @@ const Header = () => {
                   Analyses territoriales
                 </Link>
                 <Link 
-                  to="/kit-entrepreneur" 
+                  to="/kit-entrepreneur-page" 
                   className="block text-locali-text-primary hover:text-locali-green font-poppins-medium transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -113,23 +160,44 @@ const Header = () => {
                 >
                   Nos offres
                 </Link>
-                <a 
-                  href="#" 
+                <Link 
+                  to="/notre-histoire" 
                   className="block text-locali-text-primary hover:text-locali-green font-poppins-medium transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Notre Histoire
-                </a>
+                </Link>
               </div>
 
               {/* Boutons mobile */}
               <div className="space-y-3 pt-4 border-t border-gray-200">
-                <button 
-                  className="w-full bg-white border border-locali-purple-dark text-locali-purple-dark px-4 py-3 rounded-md font-poppins-medium hover:bg-locali-purple/10 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Votre compte
-                </button>
+                {/* Menu déroulant compte version mobile */}
+                <div className="relative">
+                  <button
+                    onClick={() => setIsAccountMenuOpen((open) => !open)}
+                    className="w-full bg-white border border-locali-purple-dark text-locali-purple-dark px-4 py-3 rounded-md font-poppins-medium hover:bg-locali-purple/10 transition-colors"
+                  >
+                    Votre compte
+                  </button>
+                  {isAccountMenuOpen && (
+                    <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-fade-in">
+                      <Link
+                        to="/connexion"
+                        className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-t-lg transition-colors"
+                        onClick={() => { setIsAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
+                      >
+                        Se connecter
+                      </Link>
+                      <Link
+                        to="/inscription"
+                        className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-b-lg transition-colors"
+                        onClick={() => { setIsAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
+                      >
+                        S'inscrire
+                      </Link>
+                    </div>
+                  )}
+                </div>
                 <button 
                   className="w-full bg-locali-button-dark text-white px-4 py-3 rounded-md font-poppins-medium hover:bg-locali-button-hover transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}

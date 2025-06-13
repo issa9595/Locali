@@ -2,7 +2,7 @@ import React from 'react'
 
 const WebHomepageValues = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-locali-background">
       <div className="container mx-auto px-6">
         {/* Titre principal */}
         <div className="text-center mb-16">

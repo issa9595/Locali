@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebHomepageTeam = () => {
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="py-8 md:py-16 bg-locali-background">
       <div className="container mx-auto px-4 md:px-16 lg:px-32">
         <div className="bg-locali-purple-light rounded-[25px] border-2 border-gray-300 shadow-lg p-4 md:p-8 lg:p-12 max-w-7xl mx-auto">
           {/* Titre principal */}
@@ -35,9 +36,12 @@ const WebHomepageTeam = () => {
 
               {/* Bouton */}
               <div className="pt-4 md:pt-6 text-center lg:text-right">
-                <button className="w-full lg:w-auto bg-locali-green hover:bg-locali-green-dark text-white px-6 md:px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-base md:text-lg">
+                <Link
+                  to="/notre-histoire"
+                  className="w-full lg:w-auto bg-locali-green hover:bg-locali-green-dark text-white px-6 md:px-8 py-3 rounded-md font-poppins-medium transition-all duration-300 ease-in-out text-base md:text-lg"
+                >
                   Nous connaître
-                </button>
+                </Link>
               </div>
             </div>
           </div>

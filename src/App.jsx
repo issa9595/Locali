@@ -9,9 +9,16 @@ import HomePage from './pages/HomePage'
 import MapTool from './pages/MapTool'
 import AnalyticsPage from './pages/AnalyticsPage'
 import EntrepreneurKit from './pages/EntrepreneurKit'
+import WebEntrepreneurKitPage from './pages/website/Web-Entrepreneur-Kit-Page'
+import WebAboutPage from './pages/website/Web-About-Page'
+import WebContactPage from './pages/website/Web-Contact'
+import WebSubscriptionPage from './pages/website/Web-Subscription-Page'
+import Web404 from './pages/website/Web-404'
 // import CommunesDemo from './components/CommunesDemo.jsx'
 import CarteTerritoriale from './components/CarteTerritoriale.jsx'
 // import { UpdateNotification } from './components/UpdateNotification.jsx'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 
 function App() {
   return (
@@ -28,6 +35,13 @@ function App() {
         <Route path="/carte-territoriale" element={<CarteTerritoriale />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/kit-entrepreneur" element={<EntrepreneurKit />} />
+        <Route path="/kit-entrepreneur-page" element={<WebEntrepreneurKitPage />} />
+        <Route path="/notre-histoire" element={<WebAboutPage />} />
+        <Route path="/contact" element={<WebContactPage />} />
+        <Route path="/connexion" element={<Login />} />
+        <Route path="/inscription" element={<Register />} />
+        <Route path="/abonnement" element={<WebSubscriptionPage />} />
+        <Route path="*" element={<Web404 />} />
       </Routes>
       
       

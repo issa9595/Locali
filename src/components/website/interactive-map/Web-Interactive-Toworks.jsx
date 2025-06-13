@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const WebInteractiveToworks = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-locali-background">
       <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-32 max-w-6xl">
         
         {/* Section Comment ça fonctionne */}
@@ -61,9 +62,12 @@ const WebInteractiveToworks = () => {
             </p>
           </div>
 
-          <button className="bg-locali-green hover:bg-locali-green-dark text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-12 lg:py-5 rounded-lg font-poppins-medium text-sm sm:text-base md:text-lg lg:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl">
+          <Link
+            to="/carte"
+            className="bg-locali-green hover:bg-locali-green-dark text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-12 lg:py-5 rounded-lg font-poppins-medium text-sm sm:text-base md:text-lg lg:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             Essayez Gratuitement
-          </button>
+          </Link>
         </div>
       </div>
     </section>

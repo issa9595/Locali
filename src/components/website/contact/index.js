@@ -1,0 +1,1 @@
+export { default as WebContactContact } from './Web-Contact-Contact'

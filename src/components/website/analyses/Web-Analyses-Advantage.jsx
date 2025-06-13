@@ -30,7 +30,7 @@ const Web_Analyses_Advantage = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-locali-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Avantages */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const ContactForm = ({ 
+const WebContactContact = ({ 
   title = "Nous contacter",
   subtitle = "Une question, un projet ou simplement envie d'échanger ? Notre équipe est à votre écoute. Remplissez le formulaire ci-dessous : nous vous répondrons dans les plus brefs délais.",
   showInBox = true,
@@ -121,9 +121,17 @@ const ContactForm = ({
 
   if (showInBox) {
     return (
-      <section className={`py-8 md:py-16 bg-locali-background ${className}`}>
+      <section 
+        className={`py-8 md:py-16 ${className}`}
+        style={{ 
+          backgroundImage: "url('/assets/images/GlobalPages/Contact-Background-image.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container mx-auto px-4 md:px-16 lg:px-32">
-          <div className="bg-locali-purple-light rounded-[25px] border-2 border-gray-300 shadow-lg p-4 md:p-8 lg:p-12 max-w-7xl mx-auto">
+          <div className="bg-locali-purple-light/90 rounded-[25px] border-2 border-gray-300 shadow-lg p-4 md:p-8 lg:p-12 max-w-7xl mx-auto">
             {formContent}
           </div>
         </div>
@@ -138,4 +146,4 @@ const ContactForm = ({
   )
 }
 
-export default ContactForm
+export default WebContactContact
