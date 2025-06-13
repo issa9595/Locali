@@ -104,7 +104,7 @@ const Web_Analyses_Data = () => {
           <div className="bg-locali-purple-light rounded-3xl p-8 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Métriques disponibles - Colonne gauche */}
-              <div>
+              <div className="flex flex-col h-full">
                 <h3 className="text-2xl font-poppins-bold text-locali-purple-dark mb-8">
                   Données disponibles
                 </h3>
@@ -132,14 +132,15 @@ const Web_Analyses_Data = () => {
                     </button>
                   ))}
                 </div>
-                
                 {/* Bouton "Plus de données" */}
-                <Link
-                  to="/abonnement"
-                  className="mt-6 bg-locali-purple-dark text-white px-6 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors"
-                >
-                  Plus de données
-                </Link>
+                <div className="mt-8">
+                  <Link
+                    to="/abonnement"
+                    className="bg-locali-purple-dark text-white px-4 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors"
+                  >
+                    Plus de données
+                  </Link>
+                </div>
               </div>
 
               {/* Visualisation des données - Colonne droite */}
