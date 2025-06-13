@@ -13,7 +13,7 @@ const WebHomepageOffers = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {/* Carte Interactive */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto flex flex-col h-full">
             <div className="h-48 bg-gray-200">
               <img 
                 src="/assets/images/GlobalPages/offers-image.png" 
@@ -21,14 +21,14 @@ const WebHomepageOffers = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-1">
               <h3 className="text-xl font-kallisto-bold text-locali-blue mb-3">
                 Carte Interactive
               </h3>
-              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed">
+              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed flex-1">
                 Visualisez les entreprises par secteur d'activité et identifiez les opportunités d'implantation.
               </p>
-              <div className="text-right">
+              <div className="text-right mt-auto">
                 <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-6 py-2 rounded-md font-poppins-medium transition-all duration-300 ease-in-out">
                   Voir l'offre
                 </button>
@@ -37,7 +37,7 @@ const WebHomepageOffers = () => {
           </div>
 
           {/* Analyses Territoriales */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto flex flex-col h-full">
             <div className="h-48 bg-gray-200">
               <img 
                 src="/assets/images/GlobalPages/offers-image.png" 
@@ -45,14 +45,14 @@ const WebHomepageOffers = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-1">
               <h3 className="text-xl font-kallisto-bold text-locali-blue mb-3">
                 Analyses Territoriales
               </h3>
-              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed">
+              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed flex-1">
                 Accédez à des données essentielles : démographie, criminalité, revenus, et plus encore.
               </p>
-              <div className="text-right">
+              <div className="text-right mt-auto">
                 <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-6 py-2 rounded-md font-poppins-medium transition-all duration-300 ease-in-out">
                   Voir l'offre
                 </button>
@@ -61,7 +61,7 @@ const WebHomepageOffers = () => {
           </div>
 
           {/* Kit Entrepreneurs */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-locali-green max-w-sm mx-auto flex flex-col h-full">
             <div className="h-48 bg-gray-200">
               <img
                 src="/assets/images/GlobalPages/offers-image.png" 
@@ -69,14 +69,14 @@ const WebHomepageOffers = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-1">
               <h3 className="text-xl font-kallisto-bold text-locali-blue mb-3">
                 Kit Entrepreneurs
               </h3>
-              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed">
+              <p className="font-poppins-regular text-gray-700 mb-6 text-left leading-relaxed flex-1">
                 Ressources et outils pour accompagner votre projet d'implantation.
               </p>
-              <div className="text-right">
+              <div className="text-right mt-auto">
                 <button className="bg-locali-purple hover:bg-locali-purple-dark text-white px-6 py-2 rounded-md font-poppins-medium transition-all duration-300 ease-in-out">
                   Voir l'offre
                 </button>
