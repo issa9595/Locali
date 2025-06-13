@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+  const [isMobileAccountMenuOpen, setIsMobileAccountMenuOpen] = useState(false)
   const accountMenuRef = useRef(null)
 
   // Fermer le menu compte si on clique ailleurs
@@ -174,24 +175,24 @@ const Header = () => {
                 {/* Menu déroulant compte version mobile */}
                 <div className="relative">
                   <button
-                    onClick={() => setIsAccountMenuOpen((open) => !open)}
+                    onClick={() => setIsMobileAccountMenuOpen((open) => !open)}
                     className="w-full bg-white border border-locali-purple-dark text-locali-purple-dark px-4 py-3 rounded-md font-poppins-medium hover:bg-locali-purple/10 transition-colors"
                   >
                     Votre compte
                   </button>
-                  {isAccountMenuOpen && (
+                  {isMobileAccountMenuOpen && (
                     <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-fade-in">
                       <Link
                         to="/connexion"
                         className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-t-lg transition-colors"
-                        onClick={() => { setIsAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
+                        onClick={() => { setIsMobileAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
                       >
                         Se connecter
                       </Link>
                       <Link
                         to="/inscription"
                         className="block px-4 py-3 text-gray-800 hover:bg-locali-purple-light hover:text-locali-purple-dark font-poppins-medium rounded-b-lg transition-colors"
-                        onClick={() => { setIsAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
+                        onClick={() => { setIsMobileAccountMenuOpen(false); setIsMobileMenuOpen(false) }}
                       >
                         S'inscrire
                       </Link>

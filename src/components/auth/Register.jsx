@@ -48,8 +48,8 @@ const Register = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/images/Login/Signup-Background-image.png')" }}
     >
-      <div className="bg-[#C6F68D] bg-opacity-95 rounded-2xl shadow-2xl p-8 w-full max-w-3xl flex flex-col items-center">
-        <h2 className="text-3xl md:text-4xl font-kallisto-bold text-white text-center mb-8 tracking-wide">
+      <div className="bg-[#C6F68D] bg-opacity-95 rounded-2xl shadow-2xl p-4 md:p-8 w-full max-w-xs md:max-w-2xl lg:max-w-3xl flex flex-col items-center">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-kallisto-bold text-white text-center mb-8 tracking-wide">
           Inscrivez - vous
         </h2>
         <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -59,7 +59,7 @@ const Register = () => {
             value={form.nom}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Nom"
           />
           <input
@@ -68,7 +68,7 @@ const Register = () => {
             value={form.prenom}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Prénom"
           />
           <select
@@ -76,7 +76,7 @@ const Register = () => {
             value={form.statut}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
           >
             <option value="" disabled>Statut</option>
             {statuts.slice(1).map((s, i) => (
@@ -89,7 +89,7 @@ const Register = () => {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Email"
           />
           <select
@@ -97,7 +97,7 @@ const Register = () => {
             value={form.secteur}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
           >
             <option value="" disabled>Secteur d'activité</option>
             {secteurs.slice(1).map((s, i) => (
@@ -109,7 +109,7 @@ const Register = () => {
             name="telephone"
             value={form.telephone}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Téléphone"
           />
           <input
@@ -118,7 +118,7 @@ const Register = () => {
             value={form.password}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Mot de passe"
           />
           <input
@@ -127,7 +127,7 @@ const Register = () => {
             value={form.passwordConfirm}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-base"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base"
             placeholder="Validation du mot de passe"
           />
         </form>
@@ -141,7 +141,7 @@ const Register = () => {
               className="mr-2 accent-green-500 w-4 h-4"
               required
             />
-            <label htmlFor="cgu" className="text-sm text-gray-800 font-poppins-regular">
+            <label htmlFor="cgu" className="text-xs md:text-sm text-gray-800 font-poppins-regular">
               J'accepte les conditions générales d'utilisation
             </label>
           </div>
@@ -153,7 +153,7 @@ const Register = () => {
               onChange={e => setAcceptNewsletter(e.target.checked)}
               className="mr-2 accent-green-500 w-4 h-4"
             />
-            <label htmlFor="newsletter" className="text-sm text-gray-800 font-poppins-regular">
+            <label htmlFor="newsletter" className="text-xs md:text-sm text-gray-800 font-poppins-regular">
               J'accepte de recevoir la newsletter ainsi que des offres et actualités exclusives
             </label>
           </div>
@@ -161,13 +161,13 @@ const Register = () => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-poppins-semibold transition-colors mb-2"
+          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 md:py-3 rounded-lg font-poppins-semibold transition-colors mb-2 text-sm md:text-base"
         >
           S'inscrire
         </button>
         <Link
           to="/connexion"
-          className="block text-green-900 hover:underline font-poppins-medium text-center mt-2"
+          className="block text-green-900 hover:underline font-poppins-medium text-center mt-2 text-sm md:text-base"
         >
           Se connecter
         </Link>
