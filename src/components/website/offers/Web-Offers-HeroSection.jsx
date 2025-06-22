@@ -28,7 +28,7 @@ const WebOffersHeroSection = () => {
 
             {/* Description */}
             <div className="mb-6 sm:mb-8">
-              <p className="font-poppins-regular text-white leading-relaxed text-sm sm:text-base">
+              <p className="font-poppins-regular text-white leading-relaxed text-sm sm:text-base text-justify">
                 Notre carte interactive est au cœur de la solution Locali. Elle permet de visualiser facilement les données clés d'un territoire : entreprises en place, données démographiques, zones d'activités, etc. Intuitive et pratique, elle vous aide à analyser votre environnement, à repérer les meilleures opportunités et à prendre des décisions rapides et éclairées pour votre implantation.
               </p>
             </div>

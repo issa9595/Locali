@@ -8,7 +8,7 @@ const WebInteractiveToworks = () => {
         
         {/* Section Comment ça fonctionne */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-kallisto-bold text-locali-purple-dark mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-kallisto-bold text-locali-blue mb-8 sm:mb-12 md:mb-16">
             Comment ça fonctionne ?
           </h2>
           
@@ -19,7 +19,7 @@ const WebInteractiveToworks = () => {
               <div className="text-6xl sm:text-7xl md:text-8xl font-kallisto-bold text-locali-green mb-2 sm:mb-3">
                 1
               </div>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple max-w-40">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple-dark max-w-40">
                 Choisissez votre zone
               </p>
             </div>
@@ -29,7 +29,7 @@ const WebInteractiveToworks = () => {
               <div className="text-6xl sm:text-7xl md:text-8xl font-kallisto-bold text-locali-green mb-2 sm:mb-3">
                 2
               </div>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple max-w-40">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple-dark max-w-40">
                 Rentrez vos critères
               </p>
             </div>
@@ -39,7 +39,7 @@ const WebInteractiveToworks = () => {
               <div className="text-6xl sm:text-7xl md:text-8xl font-kallisto-bold text-locali-green mb-2 sm:mb-3">
                 3
               </div>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple max-w-40">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins-medium text-locali-purple-dark max-w-40">
                 Analysez vos données
               </p>
             </div>
@@ -48,7 +48,7 @@ const WebInteractiveToworks = () => {
 
         {/* Section Pourquoi l'utiliser */}
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-kallisto-bold text-locali-purple-dark mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-kallisto-bold text-locali-blue mb-8 sm:mb-10 md:mb-12">
             Pourquoi l'utiliser ?
           </h2>
           

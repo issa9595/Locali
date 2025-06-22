@@ -34,14 +34,22 @@ const WebOffersOffers = () => {
             </div>
           </div>
           <div className="bg-gray-300 rounded-lg h-64 flex items-center justify-center">
-            <span className="text-gray-500 font-poppins-regular">Image placeholder</span>
+            <img 
+              src="/assets/images/GlobalPages/Homepage-Interactive-card.png" 
+              alt="Carte interactive Locali" 
+              className="w-full h-full object-fill rounded-lg"
+            />
           </div>
         </div>
 
         {/* Analyses territoriales - Droite */}
         <div className="grid md:grid-cols-2 gap-16 mb-20 items-center">
           <div className="bg-gray-300 rounded-lg h-64 flex items-center justify-center order-2 md:order-1">
-            <span className="text-gray-500 font-poppins-regular">Image placeholder</span>
+            <img 
+              src="/assets/images/GlobalPages/Homepage-Analyses-card.png" 
+              alt="Analyses territoriales Locali" 
+              className="w-full h-full object-fill rounded-lg"
+            />
           </div>
           <div className="space-y-8 order-1 md:order-2">
             <h3 className="text-3xl font-kallisto-bold text-locali-purple-dark mb-6">
@@ -86,7 +94,11 @@ const WebOffersOffers = () => {
             </div>
           </div>
           <div className="bg-gray-300 rounded-lg h-64 flex items-center justify-center">
-            <span className="text-gray-500 font-poppins-regular">Image placeholder</span>
+            <img 
+              src="/assets/images/GlobalPages/Homepage-Entrepreneur-card.png" 
+              alt="Kit entrepreneur Locali" 
+              className="w-full h-full object-fill rounded-lg"
+            />
           </div>
         </div>
       </div>
