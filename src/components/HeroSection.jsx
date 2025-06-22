@@ -10,7 +10,7 @@ const HeroSection = () => {
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white max-w-4xl px-2 sm:px-6">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-kallisto-bold mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-4xl font-kallisto-bold mb-4 sm:mb-6 leading-tight">
             Quelle stratégie suivre pour s'implanter efficacement sur un territoire ?
           </h1>
           

@@ -8,7 +8,7 @@ const WebAboutObjectif = () => {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-kallisto-bold text-locali-blue text-center mb-4 sm:mb-6">
           Nos objectifs
         </h2>
-        <p className="font-poppins-regular text-locali-blue text-base sm:text-lg text-center mb-6">
+        <p className="font-poppins-regular text-locali-blue text-base sm:text-lg text-justify mb-6">
           Chez Locali, notre ambition est simple : accompagner les entrepreneurs dans la réussite de leur projet, dès les premières étapes. On veut leur faire gagner du temps, éviter les erreurs d'implantation, et surtout leur offrir des réponses claires, fiables et accessibles. Être à l'écoute, rester proches de nos utilisateurs, comprendre leurs besoins réels.
         </p>
         <div className="flex justify-center">
