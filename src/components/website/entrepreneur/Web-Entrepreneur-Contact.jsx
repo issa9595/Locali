@@ -5,4 +5,4 @@ const WebEntrepreneurContact = () => {
   return <ContactForm />
 }
 
-export default WebEntrepreneurContact 
+export default WebEntrepreneurContact

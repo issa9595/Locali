@@ -1,11 +1,11 @@
 import React from 'react'
 
 const FormButton = ({
-  type = "button",
-  variant = "primary",
-  size = "md",
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
   children,
-  className = "",
+  className = '',
   ...props
 }) => {
   const variants = {
@@ -31,4 +31,4 @@ const FormButton = ({
   )
 }
 
-export default FormButton 
+export default FormButton

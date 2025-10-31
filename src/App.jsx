@@ -20,31 +20,30 @@ import CarteTerritoriale from './components/CarteTerritoriale.jsx'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 
-function App() {
+function App () {
   return (
     <MainLayout>
       {/* Notification de mise à jour automatique - TEMPORAIREMENT DÉSACTIVÉE */}
       {/* <UpdateNotification variant="banner" /> */}
       <Routes>
-        <Route path="/" element={<WebHomepage />} />
-        <Route path="/offres" element={<WebOffers />} />
-        <Route path="/locali-map" element={<WebInteractiveMapPage />} />
-        <Route path="/analyses" element={<WebAnalysesPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/carte" element={<MapTool />} />
-        <Route path="/carte-territoriale" element={<CarteTerritoriale />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
-        <Route path="/kit-entrepreneur" element={<EntrepreneurKit />} />
-        <Route path="/kit-entrepreneur-page" element={<WebEntrepreneurKitPage />} />
-        <Route path="/notre-histoire" element={<WebAboutPage />} />
-        <Route path="/contact" element={<WebContactPage />} />
-        <Route path="/connexion" element={<Login />} />
-        <Route path="/inscription" element={<Register />} />
-        <Route path="/abonnement" element={<WebSubscriptionPage />} />
-        <Route path="*" element={<Web404 />} />
+        <Route path='/' element={<WebHomepage />} />
+        <Route path='/offres' element={<WebOffers />} />
+        <Route path='/locali-map' element={<WebInteractiveMapPage />} />
+        <Route path='/analyses' element={<WebAnalysesPage />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/carte' element={<MapTool />} />
+        <Route path='/carte-territoriale' element={<CarteTerritoriale />} />
+        <Route path='/analytics' element={<AnalyticsPage />} />
+        <Route path='/kit-entrepreneur' element={<EntrepreneurKit />} />
+        <Route path='/kit-entrepreneur-page' element={<WebEntrepreneurKitPage />} />
+        <Route path='/notre-histoire' element={<WebAboutPage />} />
+        <Route path='/contact' element={<WebContactPage />} />
+        <Route path='/connexion' element={<Login />} />
+        <Route path='/inscription' element={<Register />} />
+        <Route path='/abonnement' element={<WebSubscriptionPage />} />
+        <Route path='*' element={<Web404 />} />
       </Routes>
-      
-      
+
       {/* Notification toast flottante pour les mises à jour - TEMPORAIREMENT DÉSACTIVÉE */}
       {/* <UpdateNotification variant="toast" /> */}
     </MainLayout>

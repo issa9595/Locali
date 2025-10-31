@@ -6,7 +6,7 @@ function MainRouter () {
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
-	  <Route path='/maptool' element={<MapTool />} />
+      <Route path='/maptool' element={<MapTool />} />
     </Routes>
   )
 }

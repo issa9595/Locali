@@ -17,9 +17,9 @@ const __dirname = dirname(__filename)
 dotenv.config({ path: join(__dirname, '.env.local') })
 
 // Test des variables d'environnement
-function testEnvironment() {
+function testEnvironment () {
   console.log('🧪 Test de la configuration d\'environnement...\n')
-  
+
   const required = [
     'VITE_SUPABASE_URL',
     'VITE_SUPABASE_ANON_KEY',
@@ -43,7 +43,7 @@ function testEnvironment() {
   })
 
   console.log()
-  
+
   if (!allGood) {
     console.log('📋 Pour configurer vos variables d\'environnement:')
     console.log('1. Créez un fichier .env.local à la racine du projet')
@@ -63,12 +63,12 @@ function testEnvironment() {
 }
 
 // Test simple de l'API INSEE
-async function testInseeAPI() {
+async function testInseeAPI () {
   console.log('🔑 Test de l\'API INSEE...')
-  
+
   try {
     const { getInseeToken } = await import('./src/services/inseeService.js')
-    const token = await getInseeToken()
+    await getInseeToken()
     console.log('✅ Token INSEE obtenu avec succès')
     return true
   } catch (error) {
@@ -78,9 +78,9 @@ async function testInseeAPI() {
 }
 
 // Test de connexion Supabase
-async function testSupabase() {
+async function testSupabase () {
   console.log('📊 Test de Supabase...')
-  
+
   try {
     const { createClient } = await import('@supabase/supabase-js')
     const supabase = createClient(
@@ -89,7 +89,7 @@ async function testSupabase() {
     )
 
     // Test simple de connexion
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('zones')
       .select('count')
       .limit(1)
@@ -102,7 +102,7 @@ async function testSupabase() {
       throw error
     } else {
       console.log('✅ Connexion Supabase réussie')
-      console.log(`📊 Table "zones" trouvée`)
+      console.log('📊 Table "zones" trouvée')
       return true
     }
   } catch (error) {
@@ -112,27 +112,27 @@ async function testSupabase() {
 }
 
 // Fonction principale
-async function main() {
+async function main () {
   console.log('🧪 Test de Configuration INSEE-Supabase\n')
-  console.log('=' .repeat(50))
-  
+  console.log('='.repeat(50))
+
   // Test 1: Variables d'environnement
   if (!testEnvironment()) {
     return
   }
-  
-  console.log('=' .repeat(50))
-  
+
+  console.log('='.repeat(50))
+
   // Test 2: API INSEE
   const inseeOk = await testInseeAPI()
-  
-  console.log('=' .repeat(50))
-  
+
+  console.log('='.repeat(50))
+
   // Test 3: Supabase
   const supabaseOk = await testSupabase()
-  
-  console.log('=' .repeat(50))
-  
+
+  console.log('='.repeat(50))
+
   // Résumé
   if (inseeOk && supabaseOk) {
     console.log('🎉 Tous les tests sont passés !')
@@ -157,4 +157,4 @@ process.on('unhandledRejection', (reason) => {
 main().catch((error) => {
   console.error('\n💥 Erreur fatale:', error.message)
   process.exit(1)
-}) 
+})

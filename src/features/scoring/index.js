@@ -12,4 +12,4 @@ export { scoringService } from './services/scoringService.js'
 
 export { attractivenessScore } from './algorithms/attractivenessScore.js'
 export { economicPotential } from './algorithms/economicPotential.js'
-export { competitivenessIndex } from './algorithms/competitivenessIndex.js' 
+export { competitivenessIndex } from './algorithms/competitivenessIndex.js'

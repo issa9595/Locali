@@ -3,7 +3,7 @@
 /**
  * Script de synchronisation INSEE pour cron job
  * Usage: node sync-insee-cron.js
- * 
+ *
  * Configuration crontab recommandée:
  * # Synchronisation quotidienne à 2h du matin
  * 0 2 * * * cd /path/to/your/project && node sync-insee-cron.js >> /var/log/insee-sync.log 2>&1
@@ -55,7 +55,7 @@ const logger = {
 /**
  * Vérifie les variables d'environnement requises
  */
-function checkEnvironment() {
+function checkEnvironment () {
   const required = [
     'VITE_SUPABASE_URL',
     'VITE_SUPABASE_ANON_KEY',
@@ -64,7 +64,7 @@ function checkEnvironment() {
   ]
 
   const missing = required.filter(key => !process.env[key])
-  
+
   if (missing.length > 0) {
     logger.error(`Variables d'environnement manquantes: ${missing.join(', ')}`)
     logger.error('Vérifiez votre fichier .env.local')
@@ -77,9 +77,9 @@ function checkEnvironment() {
 /**
  * Envoie une notification (webhook, email, etc.)
  */
-async function sendNotification(type, data) {
+async function sendNotification (type, data) {
   const webhookUrl = process.env.SYNC_WEBHOOK_URL
-  
+
   if (!webhookUrl) return
 
   try {
@@ -109,7 +109,7 @@ async function sendNotification(type, data) {
 /**
  * Fonction principale avec gestion des erreurs et retry
  */
-async function main() {
+async function main () {
   const startTime = Date.now()
   let attempts = 0
   let lastError = null
@@ -123,37 +123,37 @@ async function main() {
   // Boucle de retry
   while (attempts < CONFIG.maxRetries) {
     attempts++
-    
+
     try {
       logger.info(`🔄 Tentative ${attempts}/${CONFIG.maxRetries}`)
-      
+
       const result = await runFullSync({
         batchSize: CONFIG.batchSize,
         forceRefresh: CONFIG.forceRefresh
       })
-      
+
       const duration = Math.round((Date.now() - startTime) / 1000)
-      
+
       if (result.success) {
         logger.success(`Synchronisation réussie en ${duration}s`)
         logger.info(`📊 Statistiques: ${JSON.stringify(result, null, 2)}`)
-        
+
         // Notification de succès
         await sendNotification('success', {
           duration,
           stats: result,
           attempts
         })
-        
+
         process.exit(0)
       } else {
         throw new Error(result.error)
       }
     } catch (error) {
       lastError = error
-      
+
       logger.error(`Échec de la tentative ${attempts}:`, error.message)
-      
+
       if (attempts < CONFIG.maxRetries) {
         logger.info(`⏳ Nouvelle tentative dans ${CONFIG.retryDelay / 1000}s...`)
         await new Promise(resolve => setTimeout(resolve, CONFIG.retryDelay))
@@ -163,10 +163,10 @@ async function main() {
 
   // Toutes les tentatives ont échoué
   const duration = Math.round((Date.now() - startTime) / 1000)
-  
+
   logger.error(`💥 Échec de toutes les tentatives après ${duration}s`)
   logger.error(`Dernière erreur: ${lastError?.message}`)
-  
+
   // Notification d'échec
   await sendNotification('failure', {
     duration,
@@ -174,7 +174,7 @@ async function main() {
     attempts,
     stack: lastError?.stack
   })
-  
+
   process.exit(1)
 }
 
@@ -216,4 +216,4 @@ process.on('unhandledRejection', (reason, promise) => {
 main().catch((error) => {
   logger.error('💥 Erreur fatale dans main():', error)
   process.exit(1)
-}) 
+})

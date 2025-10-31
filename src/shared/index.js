@@ -1,4 +1,4 @@
-// 🔧 Shared - Code partagé entre tous les modules Locali
+// Shared - Code partagé entre tous les modules Locali
 // APIs, hooks, utils, config, constants
 
 // API Clients
@@ -21,4 +21,4 @@ export { config } from './config/config.js'
 export { env } from './config/env.js'
 
 // Constantes
-export { CONSTANTS } from './constants/index.js' 
+export { CONSTANTS } from './constants/index.js'

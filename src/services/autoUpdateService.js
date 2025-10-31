@@ -22,18 +22,18 @@ const CONFIG = {
  * Gestionnaire d'événements pour les mises à jour
  */
 class AutoUpdateEventEmitter {
-  constructor() {
+  constructor () {
     this.listeners = {}
   }
 
-  on(event, callback) {
+  on (event, callback) {
     if (!this.listeners[event]) {
       this.listeners[event] = []
     }
     this.listeners[event].push(callback)
   }
 
-  emit(event, data) {
+  emit (event, data) {
     if (this.listeners[event]) {
       this.listeners[event].forEach(callback => {
         try {
@@ -45,7 +45,7 @@ class AutoUpdateEventEmitter {
     }
   }
 
-  off(event, callback) {
+  off (event, callback) {
     if (this.listeners[event]) {
       this.listeners[event] = this.listeners[event].filter(cb => cb !== callback)
     }
@@ -56,14 +56,14 @@ class AutoUpdateEventEmitter {
  * Service principal de mise à jour automatique
  */
 class AutoUpdateService {
-  constructor() {
+  constructor () {
     this.isRunning = false
     this.intervalId = null
     this.retryCount = 0
     this.events = new AutoUpdateEventEmitter()
     this.isInitialized = false
     this.activeHooks = new Set() // Suivi des hooks actifs
-    
+
     // NE PAS démarrer automatiquement pour éviter les boucles
     this.log('🏗️ Service d\'auto-update initialisé (en attente)')
   }
@@ -71,7 +71,7 @@ class AutoUpdateService {
   /**
    * Logger conditionnel pour éviter le spam
    */
-  log(message, ...args) {
+  log (message, ...args) {
     if (CONFIG.DEBUG || this.activeHooks.size <= 1) {
       console.log(message, ...args)
     }
@@ -80,10 +80,10 @@ class AutoUpdateService {
   /**
    * Enregistre un hook actif
    */
-  registerHook(hookId) {
+  registerHook (hookId) {
     this.activeHooks.add(hookId)
     this.log(`📝 Hook enregistré: ${hookId} (${this.activeHooks.size} actifs)`)
-    
+
     // Démarrer le service seulement si c'est le premier hook
     if (this.activeHooks.size === 1 && !this.isRunning) {
       this.start()
@@ -93,10 +93,10 @@ class AutoUpdateService {
   /**
    * Désenregistre un hook actif
    */
-  unregisterHook(hookId) {
+  unregisterHook (hookId) {
     this.activeHooks.delete(hookId)
     this.log(`📝 Hook désenregistré: ${hookId} (${this.activeHooks.size} actifs)`)
-    
+
     // Arrêter le service si plus aucun hook n'est actif
     if (this.activeHooks.size === 0 && this.isRunning) {
       this.stop()
@@ -106,18 +106,18 @@ class AutoUpdateService {
   /**
    * Démarre le service de mise à jour automatique
    */
-  start() {
+  start () {
     if (this.isRunning) {
-      this.log('⚠️ Service déjà en cours d\'exécution')
+      this.log('Service déjà en cours d\'exécution')
       return
     }
 
     this.isRunning = true
-    this.log('🔄 Service de mise à jour automatique démarré')
-    
+    this.log('Service de mise à jour automatique démarré')
+
     // Vérification immédiate (mais pas si trop récente)
     this.checkForUpdatesThrottled()
-    
+
     // Vérification périodique
     this.intervalId = setInterval(() => {
       this.checkForUpdatesThrottled()
@@ -129,89 +129,88 @@ class AutoUpdateService {
   /**
    * Arrête le service
    */
-  stop() {
+  stop () {
     if (!this.isRunning) {
       return
     }
 
     this.isRunning = false
-    
+
     if (this.intervalId) {
       clearInterval(this.intervalId)
       this.intervalId = null
     }
 
-    this.log('⏹️ Service de mise à jour automatique arrêté')
+    this.log('Service de mise à jour automatique arrêté')
     this.events.emit('stopped', { timestamp: new Date() })
   }
 
   /**
    * Vérification throttlée pour éviter les appels trop fréquents
    */
-  async checkForUpdatesThrottled() {
+  async checkForUpdatesThrottled () {
     const lastCheck = this.getLastUpdateCheck()
     const now = Date.now()
-    
+
     // Vérifier si assez de temps s'est écoulé (minimum 1 minute entre les vérifications)
     if (lastCheck && (now - lastCheck) < 60000) {
       this.log('⏭️ Vérification ignorée (trop récente)')
       return
     }
-    
+
     await this.checkForUpdates()
   }
 
   /**
    * Vérifie si une mise à jour est nécessaire
    */
-  async checkForUpdates() {
+  async checkForUpdates () {
     try {
-      this.log('🔍 Vérification de la fraîcheur des données...')
-      
+      this.log('Vérification de la fraîcheur des données...')
+
       const lastCheck = this.getLastUpdateCheck()
       const now = Date.now()
-      
+
       // Vérifier si assez de temps s'est écoulé pour une vraie vérification
       if (lastCheck && (now - lastCheck) < CONFIG.UPDATE_THRESHOLD) {
         const nextCheck = new Date(lastCheck + CONFIG.UPDATE_THRESHOLD)
-        this.log(`⏳ Prochaine vérification prévue: ${nextCheck.toLocaleString('fr-FR')}`)
-        
+        this.log(`Prochaine vérification prévue: ${nextCheck.toLocaleString('fr-FR')}`)
+
         // Mettre à jour le timestamp pour éviter les vérifications trop fréquentes
         this.setLastUpdateCheck(now)
-        
-        this.events.emit('checked', { 
-          timestamp: new Date(), 
+
+        this.events.emit('checked', {
+          timestamp: new Date(),
           needsUpdate: false,
-          lastDataUpdate: null 
+          lastDataUpdate: null
         })
         return
       }
 
       // Vérifier la dernière mise à jour en base
       const lastDataUpdate = await this.getLastDataUpdate()
-      
+
       if (lastDataUpdate && (now - lastDataUpdate.getTime()) < CONFIG.UPDATE_THRESHOLD) {
-        this.log('✅ Données à jour, pas de synchronisation nécessaire')
+        this.log('Données à jour, pas de synchronisation nécessaire')
         this.setLastUpdateCheck(now)
-        this.events.emit('checked', { 
-          timestamp: new Date(), 
+        this.events.emit('checked', {
+          timestamp: new Date(),
           needsUpdate: false,
-          lastDataUpdate 
+          lastDataUpdate
         })
         return
       }
 
       // Mise à jour nécessaire
-      this.log('📊 Mise à jour des données nécessaire')
-      this.events.emit('updateNeeded', { 
+      this.log('Mise à jour des données nécessaire')
+      this.events.emit('updateNeeded', {
         timestamp: new Date(),
-        lastDataUpdate 
+        lastDataUpdate
       })
-      
+
       await this.triggerUpdate()
-      
     } catch (error) {
-      console.error('❌ Erreur lors de la vérification des mises à jour:', error)
+      console.error('Erreur lors de la vérification des mises à jour:', error)
       this.handleError(error)
     }
   }
@@ -219,20 +218,20 @@ class AutoUpdateService {
   /**
    * Déclenche une mise à jour des données
    */
-  async triggerUpdate() {
+  async triggerUpdate () {
     try {
-      this.log('🚀 Déclenchement de la mise à jour des données...')
+      this.log('Déclenchement de la mise à jour des données...')
       this.events.emit('updateStarted', { timestamp: new Date() })
 
       // Option 1: Déclencher la synchronisation côté serveur (si disponible)
       const serverUpdate = await this.triggerServerSync()
-      
+
       if (serverUpdate.success) {
-        this.log('✅ Mise à jour serveur réussie')
+        this.log('Mise à jour serveur réussie')
         this.setLastUpdateCheck(Date.now())
         this.retryCount = 0
-        
-        this.events.emit('updateCompleted', { 
+
+        this.events.emit('updateCompleted', {
           timestamp: new Date(),
           method: 'server',
           stats: serverUpdate.stats
@@ -242,9 +241,8 @@ class AutoUpdateService {
 
       // Option 2: Notification utilisateur pour actualisation manuelle
       this.notifyUserUpdate()
-      
     } catch (error) {
-      console.error('❌ Erreur lors de la mise à jour:', error)
+      console.error('Erreur lors de la mise à jour:', error)
       this.handleError(error)
     }
   }
@@ -252,11 +250,11 @@ class AutoUpdateService {
   /**
    * Tente de déclencher une synchronisation côté serveur
    */
-  async triggerServerSync() {
+  async triggerServerSync () {
     try {
       // Vérifier s'il y a un endpoint de synchronisation
       const syncEndpoint = import.meta.env.VITE_SYNC_ENDPOINT
-      
+
       if (!syncEndpoint) {
         return { success: false, reason: 'no_endpoint' }
       }
@@ -265,7 +263,7 @@ class AutoUpdateService {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SYNC_API_KEY}`
+          Authorization: `Bearer ${import.meta.env.VITE_SYNC_API_KEY}`
         },
         body: JSON.stringify({
           source: 'auto-update-service',
@@ -279,7 +277,6 @@ class AutoUpdateService {
       } else {
         return { success: false, reason: 'server_error', status: response.status }
       }
-      
     } catch (error) {
       return { success: false, reason: 'network_error', error: error.message }
     }
@@ -288,9 +285,9 @@ class AutoUpdateService {
   /**
    * Notifie l'utilisateur qu'une mise à jour est disponible
    */
-  notifyUserUpdate() {
+  notifyUserUpdate () {
     const notification = {
-      title: '📊 Mise à jour des données INSEE disponible',
+      title: 'Mise à jour des données INSEE disponible',
       message: 'Nouvelles données territoriales disponibles. Actualisez la page pour les voir.',
       timestamp: new Date(),
       actions: [
@@ -310,6 +307,7 @@ class AutoUpdateService {
 
     // Afficher une notification native si possible
     if ('Notification' in window && Notification.permission === 'granted') {
+      // eslint-disable-next-line no-new
       new Notification(notification.title, {
         body: notification.message,
         icon: '/favicon.ico',
@@ -318,31 +316,31 @@ class AutoUpdateService {
     }
 
     // Fallback: notification dans la console
-    this.log('🔔 ' + notification.title)
-    this.log('💡 ' + notification.message)
+    this.log(notification.title)
+    this.log(notification.message)
   }
 
   /**
    * Reporte la vérification de mise à jour
    */
-  snoozeUpdate(delayHours = 4) {
+  snoozeUpdate (delayHours = 4) {
     const snoozeTime = delayHours * 60 * 60 * 1000
     const nextCheck = Date.now() + snoozeTime
-    
+
     localStorage.setItem(CONFIG.STORAGE_KEY, nextCheck.toString())
-    
-    this.log(`😴 Mise à jour reportée de ${delayHours}h`)
-    this.events.emit('updateSnoozed', { 
+
+    this.log(`Mise à jour reportée de ${delayHours}h`)
+    this.events.emit('updateSnoozed', {
       timestamp: new Date(),
       nextCheck: new Date(nextCheck),
-      delayHours 
+      delayHours
     })
   }
 
   /**
    * Récupère la date de la dernière vérification
    */
-  getLastUpdateCheck() {
+  getLastUpdateCheck () {
     const stored = localStorage.getItem(CONFIG.STORAGE_KEY)
     return stored ? parseInt(stored) : null
   }
@@ -350,17 +348,17 @@ class AutoUpdateService {
   /**
    * Enregistre la date de la dernière vérification
    */
-  setLastUpdateCheck(timestamp) {
+  setLastUpdateCheck (timestamp) {
     localStorage.setItem(CONFIG.STORAGE_KEY, timestamp.toString())
   }
 
   /**
    * Récupère la date de la dernière mise à jour des données
    */
-  async getLastDataUpdate() {
+  async getLastDataUpdate () {
     try {
       const supabase = supabaseClient()
-      
+
       // Vérifier la date de dernière modification de la table
       const { data, error } = await supabase
         .from('communes_insee')
@@ -371,9 +369,8 @@ class AutoUpdateService {
       if (error) throw error
 
       return data?.[0]?.updated_at ? new Date(data[0].updated_at) : null
-      
     } catch (error) {
-      console.error('❌ Erreur lors de la récupération de la dernière mise à jour:', error)
+      console.error('Erreur lors de la récupération de la dernière mise à jour:', error)
       return null
     }
   }
@@ -381,24 +378,24 @@ class AutoUpdateService {
   /**
    * Gère les erreurs avec retry automatique
    */
-  handleError(error) {
+  handleError (error) {
     this.retryCount++
-    
-    this.events.emit('error', { 
-      timestamp: new Date(), 
+
+    this.events.emit('error', {
+      timestamp: new Date(),
       error: error.message,
       retryCount: this.retryCount,
       maxRetries: CONFIG.MAX_RETRIES
     })
 
     if (this.retryCount < CONFIG.MAX_RETRIES) {
-      this.log(`🔄 Nouvelle tentative dans ${CONFIG.RETRY_DELAY / 60000} minutes... (${this.retryCount}/${CONFIG.MAX_RETRIES})`)
-      
+      this.log(`Nouvelle tentative dans ${CONFIG.RETRY_DELAY / 60000} minutes... (${this.retryCount}/${CONFIG.MAX_RETRIES})`)
+
       setTimeout(() => {
         this.checkForUpdates()
       }, CONFIG.RETRY_DELAY)
     } else {
-      console.error('💥 Nombre maximum de tentatives atteint')
+      console.error('Nombre maximum de tentatives atteint')
       this.retryCount = 0
     }
   }
@@ -406,8 +403,8 @@ class AutoUpdateService {
   /**
    * Force une vérification immédiate
    */
-  async forceCheck() {
-    this.log('🔄 Vérification forcée des mises à jour...')
+  async forceCheck () {
+    this.log('Vérification forcée des mises à jour...')
     localStorage.removeItem(CONFIG.STORAGE_KEY)
     await this.checkForUpdates()
   }
@@ -415,7 +412,7 @@ class AutoUpdateService {
   /**
    * Retourne l'état du service
    */
-  getStatus() {
+  getStatus () {
     return {
       isRunning: this.isRunning,
       lastCheck: this.getLastUpdateCheck(),
@@ -429,26 +426,26 @@ class AutoUpdateService {
   /**
    * Ajoute un écouteur d'événements
    */
-  on(event, callback) {
+  on (event, callback) {
     this.events.on(event, callback)
   }
 
   /**
    * Supprime un écouteur d'événements
    */
-  off(event, callback) {
+  off (event, callback) {
     this.events.off(event, callback)
   }
 
   /**
    * Reset pour le debug
    */
-  reset() {
+  reset () {
     this.stop()
     this.activeHooks.clear()
     localStorage.removeItem(CONFIG.STORAGE_KEY)
     this.retryCount = 0
-    this.log('🔄 Service réinitialisé')
+    this.log('Service réinitialisé')
   }
 }
 
@@ -458,7 +455,7 @@ let autoUpdateService = null
 /**
  * Récupère l'instance du service
  */
-export function getAutoUpdateService() {
+export function getAutoUpdateService () {
   if (!autoUpdateService) {
     autoUpdateService = new AutoUpdateService()
   }
@@ -468,7 +465,7 @@ export function getAutoUpdateService() {
 /**
  * Initialise le service avec configuration personnalisée
  */
-export function initAutoUpdateService(config = {}) {
+export function initAutoUpdateService (config = {}) {
   Object.assign(CONFIG, config)
   return getAutoUpdateService()
 }
@@ -476,7 +473,7 @@ export function initAutoUpdateService(config = {}) {
 /**
  * Demande la permission pour les notifications
  */
-export async function requestNotificationPermission() {
+export async function requestNotificationPermission () {
   if ('Notification' in window && Notification.permission === 'default') {
     const permission = await Notification.requestPermission()
     return permission === 'granted'
@@ -487,15 +484,15 @@ export async function requestNotificationPermission() {
 /**
  * Reset le service pour le debug
  */
-export function resetAutoUpdateService() {
+export function resetAutoUpdateService () {
   if (autoUpdateService) {
     autoUpdateService.reset()
   }
 }
 
-export default { 
-  getAutoUpdateService, 
-  initAutoUpdateService, 
+export default {
+  getAutoUpdateService,
+  initAutoUpdateService,
   requestNotificationPermission,
   resetAutoUpdateService
-} 
+}

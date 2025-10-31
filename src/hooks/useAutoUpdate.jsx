@@ -15,7 +15,7 @@ let hookIdCounter = 0
  * @param {Object} options - Options de configuration
  * @returns {Object} État et fonctions de contrôle des mises à jour
  */
-export function useAutoUpdate(options = {}) {
+export function useAutoUpdate (options = {}) {
   const {
     enableNotifications = true,
     autoStart = true,
@@ -54,7 +54,7 @@ export function useAutoUpdate(options = {}) {
    */
   const updateStatus = useCallback(() => {
     if (!mountedRef.current) return
-    
+
     if (serviceRef.current) {
       const serviceStatus = serviceRef.current.getStatus()
       setStatus(prevStatus => ({
@@ -254,10 +254,10 @@ export function useAutoUpdate(options = {}) {
   // Effet d'initialisation unique
   useEffect(() => {
     mountedRef.current = true
-    
+
     const service = initService()
     setupEventListeners()
-    
+
     if (autoStart) {
       service.registerHook(hookIdRef.current)
     }
@@ -285,7 +285,7 @@ export function useAutoUpdate(options = {}) {
         updateStatus()
       }
     }, 120000) // Toutes les 2 minutes au lieu de 1
-    
+
     return () => clearInterval(interval)
   }, [updateStatus])
 
@@ -293,7 +293,7 @@ export function useAutoUpdate(options = {}) {
     // État
     status,
     notification,
-    
+
     // Actions
     start,
     stop,
@@ -302,7 +302,7 @@ export function useAutoUpdate(options = {}) {
     applyUpdate,
     dismissNotification,
     enableBrowserNotifications,
-    
+
     // Helpers
     isRunning: status.isRunning,
     hasUpdateAvailable: status.updateAvailable,
@@ -310,7 +310,7 @@ export function useAutoUpdate(options = {}) {
     hasError: !!status.error,
     lastCheckFormatted: status.lastCheck ? status.lastCheck.toLocaleString('fr-FR') : 'Jamais',
     nextCheckFormatted: status.nextCheck ? status.nextCheck.toLocaleString('fr-FR') : 'N/A',
-    
+
     // Debug
     hookId: hookIdRef.current
   }
@@ -320,8 +320,8 @@ export function useAutoUpdate(options = {}) {
  * Hook simplifié qui retourne seulement l'état de disponibilité des mises à jour
  * @returns {Boolean} true si une mise à jour est disponible
  */
-export function useUpdateAvailable() {
-  const { hasUpdateAvailable } = useAutoUpdate({ 
+export function useUpdateAvailable () {
+  const { hasUpdateAvailable } = useAutoUpdate({
     autoStart: true,
     enableNotifications: false // Pas de notifications pour ce hook simple
   })
@@ -333,7 +333,7 @@ export function useUpdateAvailable() {
  * @param {Function} onNotification - Callback appelé lors d'une nouvelle notification
  * @returns {Object} notification et fonction de dismiss
  */
-export function useUpdateNotifications(onNotification = null) {
+export function useUpdateNotifications (onNotification = null) {
   const { notification, dismissNotification } = useAutoUpdate({
     autoStart: true,
     enableNotifications: true,
@@ -347,4 +347,4 @@ export function useUpdateNotifications(onNotification = null) {
   }
 }
 
-export default useAutoUpdate 
+export default useAutoUpdate

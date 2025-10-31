@@ -1,0 +1,7 @@
+export { default as Toolbar } from './Toolbar.jsx'
+export { default as InfoAlert } from './InfoAlert.jsx'
+export { default as FiltersPanel } from './FiltersPanel.jsx'
+export { default as StatsSummary } from './StatsSummary.jsx'
+export { default as RemarkableCommunes } from './RemarkableCommunes.jsx'
+export { default as CommunesTable } from './CommunesTable.jsx'
+export { default as PaginationControls } from './PaginationControls.jsx'

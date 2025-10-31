@@ -7,7 +7,7 @@ import { createClient } from '@supabase/supabase-js'
 
 // Fonction utilitaire pour obtenir les variables d'environnement
 // Compatible avec Vite (import.meta.env) et Node.js (process.env)
-function getEnvVar(key) {
+function getEnvVar (key) {
   // Dans Vite/navigateur
   if (typeof import.meta !== 'undefined' && import.meta.env) {
     return import.meta.env[key]
@@ -23,7 +23,7 @@ let supabase = null
  * Obtient ou crée l'instance Supabase client
  * @returns {SupabaseClient} Instance du client Supabase
  */
-export function supabaseClient() {
+export function supabaseClient () {
   if (!supabase) {
     const supabaseUrl = getEnvVar('VITE_SUPABASE_URL')
     const supabaseKey = getEnvVar('VITE_SUPABASE_ANON_KEY')
@@ -53,7 +53,7 @@ export function supabaseClient() {
 
     console.log('🔗 Client Supabase initialisé pour Locali')
   }
-  
+
   return supabase
 }
 
@@ -62,7 +62,7 @@ export function supabaseClient() {
  */
 export const TABLES = {
   COMMUNES_INSEE: 'communes_insee',
-  DEMOGRAPHICS: 'demographics', 
+  DEMOGRAPHICS: 'demographics',
   ENTERPRISES: 'enterprises',
   REAL_ESTATE: 'real_estate',
   SCORES: 'territorial_scores',
@@ -80,4 +80,4 @@ export const SCHEMAS = {
 }
 
 // Export par défaut
-export default supabaseClient 
+export default supabaseClient

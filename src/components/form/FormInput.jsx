@@ -1,13 +1,13 @@
 import React from 'react'
 
 const FormInput = ({
-  type = "text",
+  type = 'text',
   name,
   placeholder,
   value,
   onChange,
   required = false,
-  className = "",
+  className = '',
   ...props
 }) => {
   return (
@@ -24,4 +24,4 @@ const FormInput = ({
   )
 }
 
-export default FormInput 
+export default FormInput

@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js'
 
 // Fonction utilitaire pour obtenir les variables d'environnement
 // Compatible avec Vite (import.meta.env) et Node.js (process.env)
-function getEnvVar(key) {
+function getEnvVar (key) {
   // Dans Vite/navigateur
   if (typeof import.meta !== 'undefined' && import.meta.env) {
     return import.meta.env[key]
@@ -20,7 +20,7 @@ function getEnvVar(key) {
 // Client Supabase initialisé de manière paresseuse
 let supabase = null
 
-function getSupabaseClient() {
+function getSupabaseClient () {
   if (!supabase) {
     const supabaseUrl = getEnvVar('VITE_SUPABASE_URL')
     const supabaseKey = getEnvVar('VITE_SUPABASE_ANON_KEY')
@@ -31,7 +31,7 @@ function getSupabaseClient() {
 
     supabase = createClient(supabaseUrl, supabaseKey)
   }
-  
+
   return supabase
 }
 
@@ -40,7 +40,7 @@ function getSupabaseClient() {
  * @param {Object} options - Options de configuration
  * @returns {Object} { communes, loading, error, refresh, subscription }
  */
-export function useZonesRealtime(options = {}) {
+export function useZonesRealtime (options = {}) {
   const {
     autoFetch = true,
     disabled = false,
@@ -48,15 +48,14 @@ export function useZonesRealtime(options = {}) {
     onUpdate = null,
     onDelete = null,
     filter = null,
-    orderBy = { column: 'nom', ascending: true },
-    limit = 1000
+    orderBy = { column: 'nom', ascending: true }
   } = options
 
   const [communes, setCommunes] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [connectionStatus, setConnectionStatus] = useState('DISCONNECTED')
-  
+
   const subscriptionRef = useRef(null)
   const retryTimeoutRef = useRef(null)
   const retryCountRef = useRef(0)
@@ -100,7 +99,7 @@ export function useZonesRealtime(options = {}) {
       setCommunes(data || [])
       console.log(`✅ ${data?.length || 0} communes chargées`)
     } catch (err) {
-      console.error('❌ Erreur lors du chargement des communes:', err)
+      console.error('Erreur lors du chargement des communes:', err)
       setError(err.message)
     } finally {
       setLoading(false)
@@ -113,13 +112,13 @@ export function useZonesRealtime(options = {}) {
   const handleRealtimeChange = useCallback((payload) => {
     const { eventType, new: newRecord, old: oldRecord } = payload
 
-    console.log(`🔄 Changement détecté: ${eventType}`, { newRecord, oldRecord })
+    console.log(`Changement détecté: ${eventType}`, { newRecord, oldRecord })
 
     switch (eventType) {
       case 'INSERT':
         setCommunes(prevCommunes => {
           const updatedCommunes = [...prevCommunes, newRecord]
-          
+
           // Appliquer l'ordre si défini
           if (orderBy) {
             updatedCommunes.sort((a, b) => {
@@ -129,10 +128,10 @@ export function useZonesRealtime(options = {}) {
               return orderBy.ascending ? comparison : -comparison
             })
           }
-          
+
           return updatedCommunes
         })
-        
+
         // Callback personnalisé
         if (onInsert) {
           onInsert(newRecord)
@@ -140,12 +139,12 @@ export function useZonesRealtime(options = {}) {
         break
 
       case 'UPDATE':
-        setCommunes(prevCommunes => 
-          prevCommunes.map(commune => 
+        setCommunes(prevCommunes =>
+          prevCommunes.map(commune =>
             commune.id === newRecord.id ? newRecord : commune
           )
         )
-        
+
         // Callback personnalisé
         if (onUpdate) {
           onUpdate(newRecord, oldRecord)
@@ -153,10 +152,10 @@ export function useZonesRealtime(options = {}) {
         break
 
       case 'DELETE':
-        setCommunes(prevCommunes => 
+        setCommunes(prevCommunes =>
           prevCommunes.filter(commune => commune.id !== oldRecord.id)
         )
-        
+
         // Callback personnalisé
         if (onDelete) {
           onDelete(oldRecord)
@@ -188,7 +187,7 @@ export function useZonesRealtime(options = {}) {
     try {
       console.log('📡 Configuration de l\'abonnement temps réel...')
       console.log(`🔄 Tentative ${retryCountRef.current + 1}/${maxRetries}`)
-      
+
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe()
       }
@@ -206,19 +205,19 @@ export function useZonesRealtime(options = {}) {
           handleRealtimeChange
         )
         .subscribe((status, err) => {
-          console.log(`📊 Statut de l'abonnement: ${status}`)
+          console.log(`Statut de l'abonnement: ${status}`)
           setConnectionStatus(status)
 
           if (status === 'SUBSCRIBED') {
             console.log('✅ Abonnement temps réel actif')
             retryCountRef.current = 0
           } else if (status === 'CHANNEL_ERROR' || status === 'CLOSED') {
-            console.error('❌ Erreur dans l\'abonnement temps réel:', err)
+            console.error('Erreur dans l\'abonnement temps réel:', err)
             retryCountRef.current++
-            
+
             if (retryCountRef.current < maxRetries) {
-              console.log(`🔄 Tentative de reconnexion ${retryCountRef.current + 1}/${maxRetries} dans 2 secondes...`)
-              
+              console.log(`Tentative de reconnexion ${retryCountRef.current + 1}/${maxRetries} dans 2 secondes...`)
+
               retryTimeoutRef.current = setTimeout(() => {
                 setupRealtimeSubscription()
               }, 2000)
@@ -230,7 +229,7 @@ export function useZonesRealtime(options = {}) {
           } else if (status === 'TIMED_OUT') {
             console.warn('⏰ Timeout de l\'abonnement temps réel')
             retryCountRef.current++
-            
+
             if (retryCountRef.current < maxRetries) {
               retryTimeoutRef.current = setTimeout(() => {
                 setupRealtimeSubscription()
@@ -241,12 +240,11 @@ export function useZonesRealtime(options = {}) {
 
       subscriptionRef.current = subscription
       return subscription
-
     } catch (err) {
-      console.error('❌ Erreur lors de la configuration de l\'abonnement:', err)
+      console.error('Erreur lors de la configuration de l\'abonnement:', err)
       setError(`Erreur temps réel: ${err.message}`)
       retryCountRef.current++
-      
+
       if (retryCountRef.current < maxRetries) {
         retryTimeoutRef.current = setTimeout(() => {
           setupRealtimeSubscription()
@@ -292,7 +290,7 @@ export function useZonesRealtime(options = {}) {
     if (autoFetch) {
       fetchCommunes()
     }
-    
+
     if (subscriptionRef.current) {
       subscriptionRef.current.unsubscribe()
       subscriptionRef.current = null
@@ -301,11 +299,11 @@ export function useZonesRealtime(options = {}) {
       clearTimeout(retryTimeoutRef.current)
       retryTimeoutRef.current = null
     }
-    
+
     retryCountRef.current = 0
-    
+
     if (!disabled) {
-      const subscription = setupRealtimeSubscription()
+      setupRealtimeSubscription()
     } else {
       setConnectionStatus('DISABLED')
     }
@@ -335,7 +333,7 @@ export function useZonesRealtime(options = {}) {
     loading,
     error,
     connectionStatus,
-    
+
     // Actions
     refresh,
     addCommune,
@@ -345,7 +343,7 @@ export function useZonesRealtime(options = {}) {
     addZone: addCommune,
     updateZone: updateCommune,
     removeZone: removeCommune,
-    
+
     // Métadonnées
     subscription: subscriptionRef.current,
     totalCount: communes.length
@@ -356,7 +354,7 @@ export function useZonesRealtime(options = {}) {
  * Hook simplifié pour une utilisation basique
  * @returns {Object} { communes, zones, loading, error, refresh }
  */
-export function useZones() {
+export function useZones () {
   return useZonesRealtime({
     autoFetch: true,
     orderBy: { column: 'nom', ascending: true }
@@ -368,7 +366,7 @@ export function useZones() {
  * @param {string} communeId - ID de la commune à surveiller
  * @returns {Object} { commune, zone, loading, error, refresh }
  */
-export function useZoneById(communeId) {
+export function useZoneById (communeId) {
   const [commune, setCommune] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -435,4 +433,4 @@ export function useZoneById(communeId) {
     error,
     refresh: fetchCommune
   }
-} 
+}

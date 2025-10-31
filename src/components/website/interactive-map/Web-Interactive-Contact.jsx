@@ -5,4 +5,4 @@ const WebInteractiveContact = () => {
   return <ContactForm />
 }
 
-export default WebInteractiveContact 
+export default WebInteractiveContact
