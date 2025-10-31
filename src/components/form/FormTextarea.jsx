@@ -7,7 +7,7 @@ const FormTextarea = ({
   onChange,
   required = false,
   rows = 4,
-  className = "",
+  className = '',
   ...props
 }) => {
   return (
@@ -24,4 +24,4 @@ const FormTextarea = ({
   )
 }
 
-export default FormTextarea 
+export default FormTextarea

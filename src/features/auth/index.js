@@ -12,4 +12,4 @@ export { useRoles } from './hooks/useRoles.js'
 export { authService } from './services/authService.js'
 export { roleService } from './services/roleService.js'
 
-export { UserRole, Permission } from './types/auth.types.js' 
+export { UserRole, Permission } from './types/auth.types.js'

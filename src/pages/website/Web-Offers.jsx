@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { WebOffersHeroSection, WebOffersOffers, WebOffersIndispensable, WebOffersSubscribes, WebOffersContact } from '../../components/website/offers'
 
-function WebOffers() {
+function WebOffers () {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div>
@@ -12,9 +12,9 @@ function WebOffers() {
       <WebOffersOffers />
       <WebOffersIndispensable />
       <WebOffersSubscribes />
-	  <WebOffersContact />
+      <WebOffersContact />
     </div>
   )
 }
 
-export default WebOffers 
+export default WebOffers

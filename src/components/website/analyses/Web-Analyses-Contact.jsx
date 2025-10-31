@@ -5,4 +5,4 @@ const WebAnalysesContact = () => {
   return <ContactForm />
 }
 
-export default WebAnalysesContact 
+export default WebAnalysesContact

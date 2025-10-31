@@ -7,18 +7,18 @@ import React, { useState, useCallback, useMemo } from 'react'
 import Map, { Source, Layer } from 'react-map-gl'
 import { useZonesRealtime } from '../hooks/useZonesRealtime'
 
-export default function ZonesMap() {
+export default function ZonesMap () {
   const [selectedZone, setSelectedZone] = useState(null)
   const [showPopulation, setShowPopulation] = useState(true)
-  
+
   // Hook temps réel pour les zones
-  const { 
-    zones, 
-    loading, 
-    error, 
-    connectionStatus, 
+  const {
+    zones,
+    loading,
+    error,
+    connectionStatus,
     refresh,
-    totalCount 
+    totalCount
   } = useZonesRealtime({
     autoFetch: true,
     onInsert: (zone) => {
@@ -26,7 +26,7 @@ export default function ZonesMap() {
       // Optionnel : notification toast
     },
     onUpdate: (zone, oldZone) => {
-      console.log('🔄 Zone mise à jour:', zone.nom)
+      console.log('Zone mise à jour:', zone.nom)
       // Optionnel : notification des changements
     },
     onDelete: (zone) => {
@@ -99,7 +99,7 @@ export default function ZonesMap() {
   // Gestionnaire de clic sur la carte
   const handleMapClick = useCallback((event) => {
     const feature = event.features?.[0]
-    
+
     if (feature && feature.layer.id === 'zones') {
       const zone = zones.find(z => z.id === feature.properties.id)
       setSelectedZone(zone)
@@ -121,15 +121,15 @@ export default function ZonesMap() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-locali-purple/10">
-        <div className="text-center">
-          <div className="text-locali-purple-dark text-xl mb-4">❌ Erreur de chargement</div>
-          <p className="text-locali-text-secondary mb-4">{error}</p>
-          <button 
+      <div className='min-h-screen flex items-center justify-center bg-locali-purple/10'>
+        <div className='text-center'>
+          <div className='text-locali-purple-dark text-xl mb-4'>Erreur de chargement</div>
+          <p className='text-locali-text-secondary mb-4'>{error}</p>
+          <button
             onClick={refresh}
-            className="bg-locali-purple-dark text-white px-4 py-2 rounded hover:bg-locali-purple transition-colors"
+            className='bg-locali-purple-dark text-white px-4 py-2 rounded hover:bg-locali-purple transition-colors'
           >
-            🔄 Réessayer
+            Réessayer
           </button>
         </div>
       </div>
@@ -137,66 +137,69 @@ export default function ZonesMap() {
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className='h-screen flex flex-col'>
       {/* Barre de statut */}
-      <div className="bg-locali-blue text-white p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-bold">Zones INSEE - Temps Réel</h1>
-          
-          <div className="flex items-center space-x-2">
+      <div className='bg-locali-blue text-white p-4 flex items-center justify-between'>
+        <div className='flex items-center space-x-4'>
+          <h1 className='text-xl font-bold'>Zones INSEE - Temps Réel</h1>
+
+          <div className='flex items-center space-x-2'>
             <div className={`w-3 h-3 rounded-full ${
-              connectionStatus === 'SUBSCRIBED' ? 'bg-locali-green' : 
-              connectionStatus === 'CONNECTING' ? 'bg-locali-green-light' : 'bg-locali-purple-dark'
-            }`} />
-            <span className="text-sm">
-              {connectionStatus === 'SUBSCRIBED' ? 'Connecté' : 
-               connectionStatus === 'CONNECTING' ? 'Connexion...' : 'Déconnecté'}
+              connectionStatus === 'SUBSCRIBED'
+? 'bg-locali-green'
+              : connectionStatus === 'CONNECTING' ? 'bg-locali-green-light' : 'bg-locali-purple-dark'
+            }`}
+            />
+            <span className='text-sm'>
+              {connectionStatus === 'SUBSCRIBED'
+                ? 'Connecté'
+                : connectionStatus === 'CONNECTING' ? 'Connexion...' : 'Déconnecté'}
             </span>
           </div>
 
           {loading && (
-            <div className="flex items-center space-x-2">
-              <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-              <span className="text-sm">Chargement...</span>
+            <div className='flex items-center space-x-2'>
+              <div className='animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full' />
+              <span className='text-sm'>Chargement...</span>
             </div>
           )}
         </div>
 
-        <div className="flex items-center space-x-4">
-          <span className="text-sm">{totalCount} zones</span>
-          
-          <label className="flex items-center space-x-2">
+        <div className='flex items-center space-x-4'>
+          <span className='text-sm'>{totalCount} zones</span>
+
+          <label className='flex items-center space-x-2'>
             <input
-              type="checkbox"
+              type='checkbox'
               checked={showPopulation}
               onChange={(e) => setShowPopulation(e.target.checked)}
-              className="rounded"
+              className='rounded'
             />
-            <span className="text-sm">Colorer par population</span>
+            <span className='text-sm'>Colorer par population</span>
           </label>
 
           <button
             onClick={refresh}
-            className="bg-locali-blue text-white px-3 py-1 rounded hover:bg-locali-button-hover text-sm transition-colors"
+            className='bg-locali-blue text-white px-3 py-1 rounded hover:bg-locali-button-hover text-sm transition-colors'
           >
-            🔄 Actualiser
+            Actualiser
           </button>
         </div>
       </div>
 
       {/* Carte */}
-      <div className="flex-1 relative">
+      <div className='flex-1 relative'>
         <Map
           {...viewState}
           onMove={evt => setViewState(evt.viewState)}
           onClick={handleMapClick}
           onMouseMove={handleMapHover}
           interactiveLayerIds={['zones']}
-          mapStyle="mapbox://styles/mapbox/light-v11"
+          mapStyle='mapbox://styles/mapbox/light-v11'
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         >
           {geoJsonData && (
-            <Source id="zones-source" type="geojson" data={geoJsonData}>
+            <Source id='zones-source' type='geojson' data={geoJsonData}>
               <Layer {...layerStyle} />
               <Layer {...layerStyleHover} />
             </Source>
@@ -205,51 +208,51 @@ export default function ZonesMap() {
 
         {/* Panel d'information */}
         {selectedZone && (
-          <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 w-80">
-            <div className="flex justify-between items-start mb-3">
-              <h3 className="text-lg font-semibold text-locali-text-primary">
+          <div className='absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 w-80'>
+            <div className='flex justify-between items-start mb-3'>
+              <h3 className='text-lg font-semibold text-locali-text-primary'>
                 {selectedZone.nom}
               </h3>
               <button
                 onClick={() => setSelectedZone(null)}
-                className="text-locali-text-secondary hover:text-locali-text-primary transition-colors"
+                className='text-locali-text-secondary hover:text-locali-text-primary transition-colors'
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-locali-text-secondary">Code INSEE:</span>
-                <span className="font-mono">{selectedZone.code_insee}</span>
+            <div className='space-y-2 text-sm'>
+              <div className='flex justify-between'>
+                <span className='text-locali-text-secondary'>Code INSEE:</span>
+                <span className='font-mono'>{selectedZone.code_insee}</span>
               </div>
 
               {selectedZone.population && (
-                <div className="flex justify-between">
-                  <span className="text-locali-text-secondary">Population:</span>
-                  <span className="font-semibold">
+                <div className='flex justify-between'>
+                  <span className='text-locali-text-secondary'>Population:</span>
+                  <span className='font-semibold'>
                     {selectedZone.population.toLocaleString()} hab.
                   </span>
                 </div>
               )}
 
               {selectedZone.surface && (
-                <div className="flex justify-between">
-                  <span className="text-locali-text-secondary">Surface:</span>
+                <div className='flex justify-between'>
+                  <span className='text-locali-text-secondary'>Surface:</span>
                   <span>{selectedZone.surface.toFixed(1)} km²</span>
                 </div>
               )}
 
-              <div className="flex justify-between">
-                <span className="text-locali-text-secondary">Dernière MAJ:</span>
-                <span className="text-xs">
+              <div className='flex justify-between'>
+                <span className='text-locali-text-secondary'>Dernière MAJ:</span>
+                <span className='text-xs'>
                   {new Date(selectedZone.derniere_mise_a_jour).toLocaleDateString('fr-FR')}
                 </span>
               </div>
             </div>
 
-            <div className="mt-3 pt-3 border-t">
-              <div className="text-xs text-locali-text-secondary">
+            <div className='mt-3 pt-3 border-t'>
+              <div className='text-xs text-locali-text-secondary'>
                 Mise à jour automatique en temps réel
               </div>
             </div>
@@ -258,27 +261,27 @@ export default function ZonesMap() {
 
         {/* Légende pour la coloration par population */}
         {showPopulation && geoJsonData && (
-          <div className="absolute bottom-4 right-4 bg-white rounded-lg shadow-lg p-4">
-            <h4 className="text-sm font-semibold mb-2">Population</h4>
-            <div className="space-y-1 text-xs">
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-3 bg-locali-green-light/20 border" />
+          <div className='absolute bottom-4 right-4 bg-white rounded-lg shadow-lg p-4'>
+            <h4 className='text-sm font-semibold mb-2'>Population</h4>
+            <div className='space-y-1 text-xs'>
+              <div className='flex items-center space-x-2'>
+                <div className='w-4 h-3 bg-locali-green-light/20 border' />
                 <span>0 - 1k hab.</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-3 bg-locali-green-light/40 border" />
+              <div className='flex items-center space-x-2'>
+                <div className='w-4 h-3 bg-locali-green-light/40 border' />
                 <span>1k - 5k hab.</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-3 bg-locali-green-light/60 border" />
+              <div className='flex items-center space-x-2'>
+                <div className='w-4 h-3 bg-locali-green-light/60 border' />
                 <span>5k - 20k hab.</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-3 bg-locali-green-light/80 border" />
+              <div className='flex items-center space-x-2'>
+                <div className='w-4 h-3 bg-locali-green-light/80 border' />
                 <span>20k - 100k hab.</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-3 bg-locali-green border" />
+              <div className='flex items-center space-x-2'>
+                <div className='w-4 h-3 bg-locali-green border' />
                 <span>100k+ hab.</span>
               </div>
             </div>
@@ -287,4 +290,4 @@ export default function ZonesMap() {
       </div>
     </div>
   )
-} 
+}

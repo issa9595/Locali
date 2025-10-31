@@ -9,12 +9,12 @@ import { runFullSync } from './syncZones.js'
  * Planificateur de synchronisation
  */
 export class SyncScheduler {
-  constructor(options = {}) {
+  constructor (options = {}) {
     this.isRunning = false
     this.intervalId = null
     this.lastSyncTime = null
     this.syncHistory = []
-    
+
     this.options = {
       interval: 24 * 60 * 60 * 1000, // 24h par défaut
       maxRetries: 3,
@@ -28,49 +28,49 @@ export class SyncScheduler {
   /**
    * Démarre la synchronisation automatique
    */
-  start() {
+  start () {
     if (this.isRunning) {
-      console.warn('⚠️ La synchronisation automatique est déjà en cours')
+      console.warn('La synchronisation automatique est déjà en cours')
       return
     }
 
-    console.log(`🚀 Démarrage de la synchronisation automatique (intervalle: ${this.options.interval / 1000}s)`)
-    
+    console.log(`Démarrage de la synchronisation automatique (intervalle: ${this.options.interval / 1000}s)`)
+
     // Première synchronisation immédiate
     this.runSync()
-    
+
     // Planifier les synchronisations suivantes
     this.intervalId = setInterval(() => {
       this.runSync()
     }, this.options.interval)
-    
+
     this.isRunning = true
   }
 
   /**
    * Arrête la synchronisation automatique
    */
-  stop() {
+  stop () {
     if (this.intervalId) {
       clearInterval(this.intervalId)
       this.intervalId = null
     }
-    
+
     this.isRunning = false
-    console.log('🛑 Synchronisation automatique arrêtée')
+    console.log('Synchronisation automatique arrêtée')
   }
 
   /**
    * Lance une synchronisation avec retry automatique
    */
-  async runSync() {
+  async runSync () {
     let attempts = 0
     let lastError = null
 
     while (attempts < this.options.maxRetries) {
       try {
-        console.log(`🔄 Tentative de synchronisation ${attempts + 1}/${this.options.maxRetries}`)
-        
+        console.log(`Tentative de synchronisation ${attempts + 1}/${this.options.maxRetries}`)
+
         const result = await runFullSync({
           batchSize: 100,
           forceRefresh: false
@@ -85,13 +85,13 @@ export class SyncScheduler {
             attempts: attempts + 1
           })
 
-          console.log('✅ Synchronisation automatique réussie')
-          
+          console.log('Synchronisation automatique réussie')
+
           // Callback de succès
           if (this.options.onSuccess) {
             this.options.onSuccess(result)
           }
-          
+
           return result
         } else {
           throw new Error(result.error)
@@ -99,11 +99,11 @@ export class SyncScheduler {
       } catch (error) {
         attempts++
         lastError = error
-        
-        console.error(`❌ Échec de la synchronisation (tentative ${attempts}):`, error.message)
-        
+
+        console.error(`Échec de la synchronisation (tentative ${attempts}):`, error.message)
+
         if (attempts < this.options.maxRetries) {
-          console.log(`⏳ Nouvelle tentative dans ${this.options.retryDelay / 1000}s...`)
+          console.log(`Nouvelle tentative dans ${this.options.retryDelay / 1000}s...`)
           await new Promise(resolve => setTimeout(resolve, this.options.retryDelay))
         }
       }
@@ -117,20 +117,20 @@ export class SyncScheduler {
       attempts
     })
 
-    console.error('💥 Échec de toutes les tentatives de synchronisation')
-    
+    console.error('Échec de toutes les tentatives de synchronisation')
+
     // Callback d'erreur
     if (this.options.onError) {
       this.options.onError(lastError)
     }
-    
+
     throw lastError
   }
 
   /**
    * Obtient le statut du planificateur
    */
-  getStatus() {
+  getStatus () {
     return {
       isRunning: this.isRunning,
       lastSyncTime: this.lastSyncTime,
@@ -150,21 +150,21 @@ let globalScheduler = null
  * Démarre la synchronisation automatique globale
  * @param {Object} options - Options de configuration
  */
-export function startAutoSync(options = {}) {
+export function startAutoSync (options = {}) {
   if (globalScheduler) {
     globalScheduler.stop()
   }
-  
+
   globalScheduler = new SyncScheduler(options)
   globalScheduler.start()
-  
+
   return globalScheduler
 }
 
 /**
  * Arrête la synchronisation automatique globale
  */
-export function stopAutoSync() {
+export function stopAutoSync () {
   if (globalScheduler) {
     globalScheduler.stop()
     globalScheduler = null
@@ -174,7 +174,7 @@ export function stopAutoSync() {
 /**
  * Obtient le statut de la synchronisation automatique
  */
-export function getAutoSyncStatus() {
+export function getAutoSyncStatus () {
   return globalScheduler ? globalScheduler.getStatus() : null
 }
 
@@ -202,7 +202,7 @@ serve(async (req) => {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    console.log('🚀 Démarrage de la synchronisation INSEE via Edge Function')
+    console.log('Démarrage de la synchronisation INSEE via Edge Function')
 
     // Importer et exécuter la synchronisation
     // (Vous devrez adapter le code pour Deno)
@@ -220,7 +220,7 @@ serve(async (req) => {
       }
     )
   } catch (error) {
-    console.error('❌ Erreur dans l\'Edge Function:', error)
+    console.error('Erreur dans l'Edge Function:', error)
     
     return new Response(
       JSON.stringify({ 
@@ -277,7 +277,7 @@ dotenv.config({ path: '.env.local' })
 async function main() {
   const startTime = Date.now()
   
-  console.log(\`🕒 [\${new Date().toISOString()}] Démarrage de la synchronisation INSEE via cron\`)
+  console.log(\`[\${new Date().toISOString()}] Démarrage de la synchronisation INSEE via cron\`)
   
   try {
     const result = await runFullSync({
@@ -288,15 +288,15 @@ async function main() {
     const duration = Math.round((Date.now() - startTime) / 1000)
     
     if (result.success) {
-      console.log(\`✅ [\${new Date().toISOString()}] Synchronisation réussie en \${duration}s\`)
-      console.log(\`📊 Statistiques: \${JSON.stringify(result, null, 2)}\`)
+      console.log(\`[\${new Date().toISOString()}] Synchronisation réussie en \${duration}s\`)
+      console.log(\`Statistiques: \${JSON.stringify(result, null, 2)}\`)
       process.exit(0)
     } else {
-      console.error(\`❌ [\${new Date().toISOString()}] Synchronisation échouée: \${result.error}\`)
+      console.error(\`[\${new Date().toISOString()}] Synchronisation échouée: \${result.error}\`)
       process.exit(1)
     }
   } catch (error) {
-    console.error(\`💥 [\${new Date().toISOString()}] Erreur fatale:\`, error)
+    console.error(\`[\${new Date().toISOString()}] Erreur fatale:\`, error)
     process.exit(1)
   }
 }
@@ -349,9 +349,9 @@ jobs:
       run: echo "La synchronisation INSEE a échoué"
 `
 
-console.log('📋 Scripts d\'automatisation disponibles:')
+console.log('Scripts d\'automatisation disponibles:')
 console.log('1. SyncScheduler class pour automatisation côté client')
 console.log('2. Code d\'Edge Function Supabase')
 console.log('3. Configuration cron job Unix/Linux')
 console.log('4. Configuration GitHub Actions')
-console.log('5. Script Node.js pour cron') 
+console.log('5. Script Node.js pour cron')

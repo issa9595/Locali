@@ -17,79 +17,78 @@ const __dirname = dirname(__filename)
 dotenv.config({ path: join(__dirname, '.env.local') })
 
 // Test détaillé de l'API INSEE
-async function debugInseeAPI() {
+async function debugInseeAPI () {
   console.log('🔍 Debug détaillé de l\'API INSEE\n')
-  
+
   try {
     // 1. Test d'obtention du token
     console.log('1️⃣ Test d\'obtention du token...')
     const { getInseeToken } = await import('./src/services/inseeService.js')
     const token = await getInseeToken()
     console.log(`✅ Token obtenu: ${token.substring(0, 20)}...`)
-    
+
     // 2. Test direct de l'API géo avec le token
     console.log('\n2️⃣ Test direct de l\'API géo...')
     const testUrl = 'https://geo.api.gouv.fr/communes?fields=nom,code,population&limit=5'
-    
+
     console.log(`📡 URL testée: ${testUrl}`)
     const response = await fetch(testUrl, {
       headers: {
-        'Accept': 'application/json'
+        Accept: 'application/json'
       }
     })
-    
+
     console.log(`📊 Status: ${response.status} ${response.statusText}`)
     console.log('📋 Headers de réponse:')
     for (const [key, value] of response.headers) {
       console.log(`   ${key}: ${value}`)
     }
-    
+
     if (!response.ok) {
       const errorText = await response.text()
       console.log(`❌ Erreur détaillée: ${errorText}`)
       return false
     }
-    
+
     const data = await response.json()
     console.log(`✅ Données reçues: ${Array.isArray(data) ? data.length : 'Non-array'} éléments`)
-    
+
     if (Array.isArray(data) && data.length > 0) {
       console.log('📋 Premier élément:')
       console.log(JSON.stringify(data[0], null, 2))
     }
-    
+
     // 3. Test de validation du token
     console.log('\n3️⃣ Test de validation du token...')
     const { validateToken } = await import('./src/services/inseeService.js')
     const isValid = await validateToken(token)
     console.log(`🔍 Token valide: ${isValid}`)
-    
+
     // 4. Test de récupération avec la fonction du service
     console.log('\n4️⃣ Test de récupération via le service...')
-    
+
     // Debug: tester d'abord avec une URL simple
     console.log('🔍 Test URL simple...')
     const simpleUrl = 'https://geo.api.gouv.fr/communes?fields=nom,code&limit=3'
     console.log(`📡 URL simple: ${simpleUrl}`)
     const simpleResponse = await fetch(simpleUrl)
     console.log(`📊 Status simple: ${simpleResponse.status}`)
-    
+
     if (simpleResponse.ok) {
       const simpleData = await simpleResponse.json()
       console.log(`✅ Données simples: ${simpleData.length} éléments`)
     }
-    
+
     const { fetchZonesFromInsee } = await import('./src/services/inseeService.js')
     const zones = await fetchZonesFromInsee(token, { limit: 3 })
     console.log(`✅ Zones récupérées via service: ${zones.length}`)
-    
+
     if (zones.length > 0) {
       console.log('📋 Première zone:')
       console.log(JSON.stringify(zones[0], null, 2))
     }
-    
+
     return true
-    
   } catch (error) {
     console.error('❌ Erreur lors du debug:', error)
     console.error('📝 Stack trace:', error.stack)
@@ -98,15 +97,15 @@ async function debugInseeAPI() {
 }
 
 // Test des variables d'environnement INSEE
-function checkInseeEnv() {
+function checkInseeEnv () {
   console.log('🔍 Vérification des variables INSEE...\n')
-  
+
   const clientId = process.env.VITE_INSEE_CLIENT_ID
   const clientSecret = process.env.VITE_INSEE_CLIENT_SECRET
-  
+
   console.log(`📋 Client ID: ${clientId ? `${clientId.substring(0, 10)}...` : 'MANQUANT'}`)
   console.log(`📋 Client Secret: ${clientSecret ? `${clientSecret.substring(0, 10)}...` : 'MANQUANT'}`)
-  
+
   if (!clientId || !clientSecret) {
     console.log('\n❌ Variables INSEE manquantes!')
     console.log('📖 Pour obtenir les clés INSEE:')
@@ -116,22 +115,22 @@ function checkInseeEnv() {
     console.log('4. Copier Client ID et Client Secret dans .env.local')
     return false
   }
-  
+
   console.log('✅ Variables INSEE présentes')
   return true
 }
 
 // Test des URLs INSEE
-async function testInseeURLs() {
+async function testInseeURLs () {
   console.log('\n🌐 Test des URLs...\n')
-  
+
   const urls = [
     'https://api.insee.fr',
     'https://api.insee.fr/token',
     'https://geo.api.gouv.fr',
     'https://geo.api.gouv.fr/communes'
   ]
-  
+
   for (const url of urls) {
     try {
       console.log(`📡 Test: ${url}`)
@@ -144,27 +143,27 @@ async function testInseeURLs() {
 }
 
 // Fonction principale
-async function main() {
+async function main () {
   console.log('🔍 Debug Complet API INSEE')
-  console.log('=' .repeat(50))
-  
+  console.log('='.repeat(50))
+
   // Étape 1: Variables d'environnement
   if (!checkInseeEnv()) {
     return
   }
-  
-  console.log('\n' + '=' .repeat(50))
-  
+
+  console.log('\n' + '='.repeat(50))
+
   // Étape 2: Test des URLs
   await testInseeURLs()
-  
-  console.log('\n' + '=' .repeat(50))
-  
+
+  console.log('\n' + '='.repeat(50))
+
   // Étape 3: Test complet de l'API
   const success = await debugInseeAPI()
-  
-  console.log('\n' + '=' .repeat(50))
-  
+
+  console.log('\n' + '='.repeat(50))
+
   if (success) {
     console.log('🎉 Debug terminé avec succès!')
     console.log('🚀 L\'API INSEE fonctionne correctement')

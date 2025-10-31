@@ -1,5 +1,5 @@
 export { default as WebOffersHeroSection } from './Web-Offers-HeroSection'
 export { default as WebOffersOffers } from './Web-Offers-Offers'
 export { default as WebOffersIndispensable } from './Web-Offers-Indispensable'
-export { default as WebOffersSubscribes } from './Web-Offers-Subscribes' 
-export { default as WebOffersContact } from './Web-Offers-Contact' 
+export { default as WebOffersSubscribes } from './Web-Offers-Subscribes'
+export { default as WebOffersContact } from './Web-Offers-Contact'

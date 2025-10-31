@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Web_Analyses_Data = () => {
-  const [selectedMetric, setSelectedMetric] = useState('Revenus médians');
-  const [selectedCity, setSelectedCity] = useState('Nantes');
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState('Revenus médians')
+  const [selectedCity, setSelectedCity] = useState('Nantes')
+  const [showPremiumModal, setShowPremiumModal] = useState(false)
 
   const metrics = [
     'Revenus médians',
@@ -12,7 +12,7 @@ const Web_Analyses_Data = () => {
     'Entreprises par secteur',
     'Indice de criminalité',
     'Population et ménages'
-  ];
+  ]
 
   const cities = [
     'Nantes',
@@ -23,17 +23,17 @@ const Web_Analyses_Data = () => {
     'Laval',
     'Cholet',
     'La Roche-sur-Yon'
-  ];
+  ]
 
-  const premiumMetrics = ['Entreprises par secteur', 'Population et ménages'];
+  const premiumMetrics = ['Entreprises par secteur', 'Population et ménages']
 
   const handleMetricClick = (metric) => {
     if (premiumMetrics.includes(metric)) {
-      setShowPremiumModal(true);
+      setShowPremiumModal(true)
     } else {
-      setSelectedMetric(metric);
+      setSelectedMetric(metric)
     }
-  };
+  }
 
   // Données fictives basées sur Nantes
   const nantesData = {
@@ -92,23 +92,23 @@ const Web_Analyses_Data = () => {
         { indicateur: 'Plus de 60 ans', valeur: '21.4', unite: '%' }
       ]
     }
-  };
+  }
 
   return (
-    <section className="py-16 bg-locali-background">
-      <h2 className="text-4xl md:text-5xl font-kallisto-bold text-locali-blue text-center mb-8">
+    <section className='py-16 bg-locali-background'>
+      <h2 className='text-4xl md:text-5xl font-kallisto-bold text-locali-blue text-center mb-8'>
         Analyses territoriales
       </h2>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-locali-purple-light rounded-3xl p-8 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='max-w-7xl mx-auto'>
+          <div className='bg-locali-purple-light rounded-3xl p-8 lg:p-12'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
               {/* Métriques disponibles - Colonne gauche */}
-              <div className="flex flex-col h-full">
-                <h3 className="text-2xl font-poppins-bold text-locali-purple-dark mb-8">
+              <div className='flex flex-col h-full'>
+                <h3 className='text-2xl font-poppins-bold text-locali-purple-dark mb-8'>
                   Données disponibles
                 </h3>
-                <div className="space-y-3">
+                <div className='space-y-3'>
                   {metrics.map((metric, index) => (
                     <button
                       key={index}
@@ -125,7 +125,7 @@ const Web_Analyses_Data = () => {
                         {metric}
                       </span>
                       {premiumMetrics.includes(metric) && (
-                        <span className="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs px-2 py-1 rounded-full font-poppins-semibold">
+                        <span className='absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs px-2 py-1 rounded-full font-poppins-semibold'>
                           Premium
                         </span>
                       )}
@@ -133,10 +133,10 @@ const Web_Analyses_Data = () => {
                   ))}
                 </div>
                 {/* Bouton "Plus de données" */}
-                <div className="mt-8">
+                <div className='mt-8'>
                   <Link
-                    to="/abonnement"
-                    className="bg-locali-purple-dark text-white px-4 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors"
+                    to='/abonnement'
+                    className='bg-locali-purple-dark text-white px-4 py-3 rounded-xl font-poppins-semibold hover:bg-purple-800 transition-colors'
                   >
                     Plus de données
                   </Link>
@@ -145,14 +145,14 @@ const Web_Analyses_Data = () => {
 
               {/* Visualisation des données - Colonne droite */}
               <div>
-                <div className="bg-white rounded-xl p-4 mb-4">
-                  <label className="block text-gray-600 font-poppins-regular text-sm mb-2">
+                <div className='bg-white rounded-xl p-4 mb-4'>
+                  <label className='block text-gray-600 font-poppins-regular text-sm mb-2'>
                     Sélectionnez votre secteur
                   </label>
-                  <select 
+                  <select
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-lg font-poppins-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-locali-purple focus:border-transparent"
+                    className='w-full p-2 border border-gray-300 rounded-lg font-poppins-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-locali-purple focus:border-transparent'
                   >
                     {cities.map((city, index) => (
                       <option key={index} value={city}>
@@ -161,37 +161,37 @@ const Web_Analyses_Data = () => {
                     ))}
                   </select>
                 </div>
-                <div className="bg-white rounded-xl p-6 h-96 overflow-y-auto">
-                  <h4 className="text-lg font-poppins-semibold text-locali-blue mb-4">
+                <div className='bg-white rounded-xl p-6 h-96 overflow-y-auto'>
+                  <h4 className='text-lg font-poppins-semibold text-locali-blue mb-4'>
                     {selectedCity === 'Nantes' ? nantesData[selectedMetric]?.title : `${selectedMetric} - ${selectedCity}`}
                   </h4>
-                  
+
                   {selectedCity !== 'Nantes' && (
-                    <div className="text-center py-8">
-                      <div className="text-gray-400 mb-4">
-                        <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    <div className='text-center py-8'>
+                      <div className='text-gray-400 mb-4'>
+                        <svg className='w-12 h-12 mx-auto' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1} d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' />
                         </svg>
                       </div>
-                      <p className="text-gray-500 font-poppins-regular">
+                      <p className='text-gray-500 font-poppins-regular'>
                         Données pour {selectedCity} en cours de développement
                       </p>
-                      <p className="text-gray-400 font-poppins-light text-sm mt-2">
+                      <p className='text-gray-400 font-poppins-light text-sm mt-2'>
                         Seules les données de Nantes sont actuellement disponibles
                       </p>
                     </div>
                   )}
-                  
+
                   {/* Affichage conditionnel selon le type de données - seulement pour Nantes */}
                   {selectedCity === 'Nantes' && selectedMetric === 'Revenus médians' && (
-                    <div className="space-y-3">
+                    <div className='space-y-3'>
                       {nantesData[selectedMetric].data.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`}></div>
-                            <span className="font-poppins-medium text-gray-700">{item.quartier}</span>
+                        <div key={index} className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'>
+                          <div className='flex items-center'>
+                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`} />
+                            <span className='font-poppins-medium text-gray-700'>{item.quartier}</span>
                           </div>
-                          <span className="font-poppins-semibold text-locali-green">
+                          <span className='font-poppins-semibold text-locali-green'>
                             {item.revenu.toLocaleString()}€
                           </span>
                         </div>
@@ -200,14 +200,14 @@ const Web_Analyses_Data = () => {
                   )}
 
                   {selectedCity === 'Nantes' && selectedMetric === 'Flux piéton' && (
-                    <div className="space-y-3">
+                    <div className='space-y-3'>
                       {nantesData[selectedMetric].data.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`}></div>
-                            <span className="font-poppins-medium text-gray-700">{item.zone}</span>
+                        <div key={index} className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'>
+                          <div className='flex items-center'>
+                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`} />
+                            <span className='font-poppins-medium text-gray-700'>{item.zone}</span>
                           </div>
-                          <span className="font-poppins-semibold text-blue-600">
+                          <span className='font-poppins-semibold text-blue-600'>
                             {item.flux.toLocaleString()} pers/jour
                           </span>
                         </div>
@@ -216,25 +216,25 @@ const Web_Analyses_Data = () => {
                   )}
 
                   {selectedCity === 'Nantes' && selectedMetric === 'Entreprises par secteur' && (
-                    <div className="space-y-3">
+                    <div className='space-y-3'>
                       {nantesData[selectedMetric].data.map((item, index) => (
-                        <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center">
-                              <div className={`w-4 h-4 rounded-full ${item.color} mr-3`}></div>
-                              <span className="font-poppins-medium text-gray-700">{item.secteur}</span>
+                        <div key={index} className='p-3 bg-gray-50 rounded-lg'>
+                          <div className='flex items-center justify-between mb-2'>
+                            <div className='flex items-center'>
+                              <div className={`w-4 h-4 rounded-full ${item.color} mr-3`} />
+                              <span className='font-poppins-medium text-gray-700'>{item.secteur}</span>
                             </div>
-                            <span className="font-poppins-semibold text-purple-600">
+                            <span className='font-poppins-semibold text-purple-600'>
                               {item.nombre.toLocaleString()}
                             </span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-purple-500 h-2 rounded-full" 
-                              style={{width: `${item.pourcentage}%`}}
-                            ></div>
+                          <div className='w-full bg-gray-200 rounded-full h-2'>
+                            <div
+                              className='bg-purple-500 h-2 rounded-full'
+                              style={{ width: `${item.pourcentage}%` }}
+                            />
                           </div>
-                          <span className="text-sm text-gray-500 font-poppins-regular">
+                          <span className='text-sm text-gray-500 font-poppins-regular'>
                             {item.pourcentage}%
                           </span>
                         </div>
@@ -243,18 +243,18 @@ const Web_Analyses_Data = () => {
                   )}
 
                   {selectedCity === 'Nantes' && selectedMetric === 'Indice de criminalité' && (
-                    <div className="space-y-3">
+                    <div className='space-y-3'>
                       {nantesData[selectedMetric].data.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`}></div>
-                            <span className="font-poppins-medium text-gray-700">{item.quartier}</span>
+                        <div key={index} className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'>
+                          <div className='flex items-center'>
+                            <div className={`w-4 h-4 rounded-full ${item.color} mr-3`} />
+                            <span className='font-poppins-medium text-gray-700'>{item.quartier}</span>
                           </div>
-                          <div className="text-right">
-                            <div className="font-poppins-semibold text-gray-800">
+                          <div className='text-right'>
+                            <div className='font-poppins-semibold text-gray-800'>
                               {item.indice}/1000
                             </div>
-                            <div className="text-sm font-poppins-regular text-gray-500">
+                            <div className='text-sm font-poppins-regular text-gray-500'>
                               {item.niveau}
                             </div>
                           </div>
@@ -264,11 +264,11 @@ const Web_Analyses_Data = () => {
                   )}
 
                   {selectedCity === 'Nantes' && selectedMetric === 'Population et ménages' && (
-                    <div className="space-y-3">
+                    <div className='space-y-3'>
                       {nantesData[selectedMetric].data.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                          <span className="font-poppins-medium text-gray-700">{item.indicateur}</span>
-                          <span className="font-poppins-semibold text-locali-blue">
+                        <div key={index} className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'>
+                          <span className='font-poppins-medium text-gray-700'>{item.indicateur}</span>
+                          <span className='font-poppins-semibold text-locali-blue'>
                             {item.valeur} {item.unite}
                           </span>
                         </div>
@@ -284,58 +284,58 @@ const Web_Analyses_Data = () => {
 
       {/* Modal Premium */}
       {showPremiumModal && (
-        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative">
-            <button 
+        <div className='fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
+          <div className='bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative'>
+            <button
               onClick={() => setShowPremiumModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className='absolute top-4 right-4 text-gray-400 hover:text-gray-600'
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
               </svg>
             </button>
 
-            <div className="text-center">
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            <div className='text-center'>
+              <div className='mb-6'>
+                <div className='w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+                  <svg className='w-8 h-8 text-yellow-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-poppins-bold text-locali-blue mb-2">
+                <h3 className='text-2xl font-poppins-bold text-locali-blue mb-2'>
                   Contenu Premium
                 </h3>
-                <p className="text-gray-600 font-poppins-regular">
+                <p className='text-gray-600 font-poppins-regular'>
                   Accédez à toutes les données avancées avec un abonnement Premium
                 </p>
               </div>
 
-              <div className="space-y-4 mb-8">
-                <div className="bg-gradient-to-r from-locali-purple to-locali-purple-dark rounded-xl p-6 text-white">
-                  <h4 className="text-xl font-poppins-bold mb-2">Plan Premium</h4>
-                  <div className="text-3xl font-poppins-bold mb-2">29€<span className="text-lg font-poppins-regular">/mois</span></div>
-                  <ul className="text-sm space-y-2 text-left">
-                    <li className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <div className='space-y-4 mb-8'>
+                <div className='bg-gradient-to-r from-locali-purple to-locali-purple-dark rounded-xl p-6 text-white'>
+                  <h4 className='text-xl font-poppins-bold mb-2'>Plan Premium</h4>
+                  <div className='text-3xl font-poppins-bold mb-2'>29€<span className='text-lg font-poppins-regular'>/mois</span></div>
+                  <ul className='text-sm space-y-2 text-left'>
+                    <li className='flex items-center'>
+                      <svg className='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20'>
+                        <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
                       </svg>
                       Toutes les métriques disponibles
                     </li>
-                    <li className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <li className='flex items-center'>
+                      <svg className='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20'>
+                        <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
                       </svg>
                       Données en temps réel
                     </li>
-                    <li className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <li className='flex items-center'>
+                      <svg className='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20'>
+                        <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
                       </svg>
                       Export des rapports
                     </li>
-                    <li className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <li className='flex items-center'>
+                      <svg className='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20'>
+                        <path fillRule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clipRule='evenodd' />
                       </svg>
                       Support prioritaire
                     </li>
@@ -343,13 +343,13 @@ const Web_Analyses_Data = () => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <button className="w-full bg-locali-green hover:bg-locali-green-dark text-white py-3 px-6 rounded-xl font-poppins-semibold transition-colors">
+              <div className='space-y-3'>
+                <button className='w-full bg-locali-green hover:bg-locali-green-dark text-white py-3 px-6 rounded-xl font-poppins-semibold transition-colors'>
                   Se connecter
                 </button>
-                <button 
+                <button
                   onClick={() => setShowPremiumModal(false)}
-                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-poppins-medium transition-colors"
+                  className='w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-poppins-medium transition-colors'
                 >
                   Continuer en gratuit
                 </button>
@@ -359,7 +359,7 @@ const Web_Analyses_Data = () => {
         </div>
       )}
     </section>
-  );
-};
+  )
+}
 
-export default Web_Analyses_Data; 
+export default Web_Analyses_Data

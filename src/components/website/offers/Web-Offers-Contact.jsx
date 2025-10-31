@@ -5,4 +5,4 @@ const WebOffersContact = () => {
   return <ContactForm />
 }
 
-export default WebOffersContact 
+export default WebOffersContact

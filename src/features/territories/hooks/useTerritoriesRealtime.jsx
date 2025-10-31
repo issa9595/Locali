@@ -12,7 +12,7 @@ import { supabaseClient } from '../../../shared/api/supabaseClient.js'
  * @param {Object} options - Options de configuration
  * @returns {Object} { territories, loading, error, refresh, connectionStatus }
  */
-export function useTerritoriesRealtime(options = {}) {
+export function useTerritoriesRealtime (options = {}) {
   const {
     autoFetch = true,
     disabled = false,
@@ -28,7 +28,7 @@ export function useTerritoriesRealtime(options = {}) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [connectionStatus, setConnectionStatus] = useState('DISCONNECTED')
-  
+
   const subscriptionRef = useRef(null)
   const retryTimeoutRef = useRef(null)
   const retryCountRef = useRef(0)
@@ -77,7 +77,7 @@ export function useTerritoriesRealtime(options = {}) {
       setTerritories(data || [])
       console.log(`✅ ${data?.length || 0} territoires chargés`)
     } catch (err) {
-      console.error('❌ Erreur lors du chargement des territoires:', err)
+      console.error('Erreur lors du chargement des territoires:', err)
       setError(err.message)
     } finally {
       setLoading(false)
@@ -90,13 +90,13 @@ export function useTerritoriesRealtime(options = {}) {
   const handleRealtimeChange = useCallback((payload) => {
     const { eventType, new: newRecord, old: oldRecord } = payload
 
-    console.log(`🔄 Changement territoire détecté: ${eventType}`, { newRecord, oldRecord })
+    console.log(`Changement territoire détecté: ${eventType}`, { newRecord, oldRecord })
 
     switch (eventType) {
       case 'INSERT':
         setTerritories(prevTerritories => {
           const updatedTerritories = [...prevTerritories, newRecord]
-          
+
           // Appliquer l'ordre si défini
           if (orderBy) {
             updatedTerritories.sort((a, b) => {
@@ -106,10 +106,10 @@ export function useTerritoriesRealtime(options = {}) {
               return orderBy.ascending ? comparison : -comparison
             })
           }
-          
+
           return updatedTerritories
         })
-        
+
         // Callback personnalisé
         if (onInsert) {
           onInsert(newRecord)
@@ -117,12 +117,12 @@ export function useTerritoriesRealtime(options = {}) {
         break
 
       case 'UPDATE':
-        setTerritories(prevTerritories => 
-          prevTerritories.map(territory => 
+        setTerritories(prevTerritories =>
+          prevTerritories.map(territory =>
             territory.id === newRecord.id ? newRecord : territory
           )
         )
-        
+
         // Callback personnalisé
         if (onUpdate) {
           onUpdate(newRecord, oldRecord)
@@ -130,10 +130,10 @@ export function useTerritoriesRealtime(options = {}) {
         break
 
       case 'DELETE':
-        setTerritories(prevTerritories => 
+        setTerritories(prevTerritories =>
           prevTerritories.filter(territory => territory.id !== oldRecord.id)
         )
-        
+
         // Callback personnalisé
         if (onDelete) {
           onDelete(oldRecord)
@@ -165,7 +165,7 @@ export function useTerritoriesRealtime(options = {}) {
     try {
       console.log('📡 Configuration de l\'abonnement temps réel territoires...')
       console.log(`🔄 Tentative ${retryCountRef.current + 1}/${maxRetries}`)
-      
+
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe()
       }
@@ -183,19 +183,19 @@ export function useTerritoriesRealtime(options = {}) {
           handleRealtimeChange
         )
         .subscribe((status, err) => {
-          console.log(`📊 Statut abonnement territoires: ${status}`)
+          console.log(`Statut abonnement territoires: ${status}`)
           setConnectionStatus(status)
 
           if (status === 'SUBSCRIBED') {
             console.log('✅ Abonnement territoires temps réel actif')
             retryCountRef.current = 0
           } else if (status === 'CHANNEL_ERROR' || status === 'CLOSED') {
-            console.error('❌ Erreur abonnement territoires:', err)
+            console.error('Erreur abonnement territoires:', err)
             retryCountRef.current++
-            
+
             if (retryCountRef.current < maxRetries) {
-              console.log(`🔄 Reconnexion territoires ${retryCountRef.current + 1}/${maxRetries} dans 2s...`)
-              
+              console.log(`Reconnexion territoires ${retryCountRef.current + 1}/${maxRetries} dans 2s...`)
+
               retryTimeoutRef.current = setTimeout(() => {
                 setupRealtimeSubscription()
               }, 2000)
@@ -207,7 +207,7 @@ export function useTerritoriesRealtime(options = {}) {
           } else if (status === 'TIMED_OUT') {
             console.warn('⏰ Timeout abonnement territoires')
             retryCountRef.current++
-            
+
             if (retryCountRef.current < maxRetries) {
               retryTimeoutRef.current = setTimeout(() => {
                 setupRealtimeSubscription()
@@ -218,12 +218,11 @@ export function useTerritoriesRealtime(options = {}) {
 
       subscriptionRef.current = subscription
       return subscription
-
     } catch (err) {
-      console.error('❌ Erreur configuration abonnement territoires:', err)
+      console.error('Erreur configuration abonnement territoires:', err)
       setError(`Erreur temps réel: ${err.message}`)
       retryCountRef.current++
-      
+
       if (retryCountRef.current < maxRetries) {
         retryTimeoutRef.current = setTimeout(() => {
           setupRealtimeSubscription()
@@ -261,7 +260,7 @@ export function useTerritoriesRealtime(options = {}) {
    * Supprime un territoire manuellement (optimistic update)
    */
   const removeTerritory = useCallback((territoryId) => {
-    setTerritories(prevTerritories => 
+    setTerritories(prevTerritories =>
       prevTerritories.filter(territory => territory.id !== territoryId)
     )
   }, [])
@@ -271,7 +270,7 @@ export function useTerritoriesRealtime(options = {}) {
     if (autoFetch) {
       fetchTerritories()
     }
-    
+
     if (subscriptionRef.current) {
       subscriptionRef.current.unsubscribe()
       subscriptionRef.current = null
@@ -280,9 +279,9 @@ export function useTerritoriesRealtime(options = {}) {
       clearTimeout(retryTimeoutRef.current)
       retryTimeoutRef.current = null
     }
-    
+
     retryCountRef.current = 0
-    
+
     if (!disabled) {
       setupRealtimeSubscription()
     } else {
@@ -311,17 +310,17 @@ export function useTerritoriesRealtime(options = {}) {
     // État
     territories,
     communes: territories, // Alias pour compatibilité
-    zones: territories,    // Alias pour compatibilité
+    zones: territories, // Alias pour compatibilité
     loading,
     error,
     connectionStatus,
-    
+
     // Actions
     refresh,
     addTerritory,
     updateTerritory,
     removeTerritory,
-    
+
     // Métadonnées
     subscription: subscriptionRef.current,
     totalCount: territories.length

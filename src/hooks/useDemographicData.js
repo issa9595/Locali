@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export function useDemographicData(zoneId) {
+export function useDemographicData (zoneId) {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -56,7 +56,7 @@ export function useDemographicData(zoneId) {
   return { stats, loading, error }
 }
 
-const getEntreprisesByZone = async (zoneId) => {
+export const getEntreprisesByZone = async (zoneId) => {
   const { data, error } = await supabase
     .from('batiments')
     .select(`
@@ -84,4 +84,4 @@ const getEntreprisesByZone = async (zoneId) => {
     }
   })
   return entreprisesUniques
-} 
+}

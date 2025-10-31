@@ -1,6 +1,6 @@
 /**
  * Fichier d'exemple de configuration d'environnement
- * 
+ *
  * Copiez ce fichier vers .env.local à la racine du projet
  * et remplissez les valeurs avec vos vraies clés
  */
@@ -37,6 +37,14 @@ NODE_ENV=development
 # VITE_INSEE_BASE_URL=https://api.insee.fr
 
 # ===========================================
+# Configuration EmailJS
+# ===========================================
+# Identifiants EmailJS: créez un service + template sur https://dashboard.emailjs.com
+VITE_EMAILJS_SERVICE_ID=service_xxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxx
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxx
+
+# ===========================================
 # Instructions pour obtenir les clés INSEE
 # ===========================================
 # 1. Aller sur https://api.insee.fr/catalogue/
@@ -70,4 +78,4 @@ console.log('📋 Pour créer votre fichier .env.local:')
 console.log('1. Créez un fichier .env.local à la racine du projet')
 console.log('2. Copiez le contenu ci-dessus')
 console.log('3. Remplacez les valeurs par vos vraies clés')
-console.log(ENV_EXAMPLE) 
+console.log(ENV_EXAMPLE)

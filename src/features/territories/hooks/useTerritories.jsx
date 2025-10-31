@@ -20,7 +20,7 @@ const territoriesCache = {
  * @param {Object} options - Options de configuration optionnelles
  * @returns {Object} { territories, communes, zones, loading, error, refresh }
  */
-export function useTerritories(options = {}) {
+export function useTerritories (options = {}) {
   const {
     autoFetch = true,
     disabled = false,
@@ -149,7 +149,7 @@ export function useTerritories(options = {}) {
         }, 0)
       }
     } catch (err) {
-      console.error('❌ Erreur lors du chargement des territoires:', err)
+      console.error('Erreur lors du chargement des territoires:', err)
       territoriesCache.loading = false
       if (mountedRef.current) {
         setError(err.message)
@@ -171,7 +171,7 @@ export function useTerritories(options = {}) {
   // Effet pour l'initialisation (une seule fois)
   useEffect(() => {
     mountedRef.current = true
-    
+
     if (autoFetch && !fetchedRef.current) {
       fetchTerritories()
     }
@@ -193,13 +193,13 @@ export function useTerritories(options = {}) {
     // État
     territories,
     communes: territories, // Alias pour compatibilité
-    zones: territories,    // Alias pour compatibilité
+    zones: territories, // Alias pour compatibilité
     loading,
     error,
-    
+
     // Actions
     refresh,
-    
+
     // Métadonnées
     totalCount,
     connectionStatus: disabled ? 'DISABLED' : 'STABLE' // Pas de realtime
@@ -211,9 +211,9 @@ export function useTerritories(options = {}) {
  * @param {Object} options - Options de configuration
  * @returns {Object} { communes, loading, error, refresh }
  */
-export function useCommunes(options = {}) {
+export function useCommunes (options = {}) {
   const result = useTerritories(options)
-  
+
   return {
     communes: result.territories,
     loading: result.loading,
@@ -226,12 +226,12 @@ export function useCommunes(options = {}) {
 
 /**
  * Hook pour récupérer seulement les zones (alias pour compatibilité)
- * @param {Object} options - Options de configuration  
+ * @param {Object} options - Options de configuration
  * @returns {Object} { zones, loading, error, refresh }
  */
-export function useZones(options = {}) {
+export function useZones (options = {}) {
   const result = useTerritories(options)
-  
+
   return {
     zones: result.territories,
     communes: result.territories, // Double alias
@@ -241,4 +241,4 @@ export function useZones(options = {}) {
     totalCount: result.totalCount,
     connectionStatus: result.connectionStatus
   }
-} 
+}

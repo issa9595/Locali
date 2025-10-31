@@ -14,4 +14,4 @@ export { mapboxService } from './services/mapboxService.js'
 export { geoDataService } from './services/geoDataService.js'
 
 export { mapHelpers } from './utils/mapHelpers.js'
-export { geoCalculations } from './utils/geoCalculations.js' 
+export { geoCalculations } from './utils/geoCalculations.js'
