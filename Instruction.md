@@ -1,6 +1,25 @@
 ## Historique des actions
 
 - 2025-10-31
+  - Auth — cadrage et plan d’implémentation
+    - Analyse: projet SPA React + Vite, pas de backend custom, Supabase déjà utilisé (client, Realtime, Edge Functions). Routes publiques: site vitrine uniquement; le reste (dashboard, outils) doit être privé. Rôles: super_admin et utilisateur.
+    - Recommandations:
+      - Auth provider: Supabase Auth (email/mot de passe + OAuth).
+      - Rôles: table `profiles` avec colonne `role` et RLS; exposition du rôle dans les policies (claims via `auth.jwt()` si nécessaire).
+      - Sessions: court terme — sessions gérées par `@supabase/supabase-js` (access token + refresh, PKCE), stockage côté navigateur; long terme — passer à cookies httpOnly via un micro-backend (Express/Cloudflare Worker) pour renforcer la sécurité et la conformité RGPD.
+      - UX: après login, redirection vers `/dashboard`; garde de routes via React Router v7; lien Login/Logout/Dashboard dans `Header`.
+      - RGPD: consentement, export/suppression de compte minimal, mentions légales.
+    - Étapes prévues (todo): SQL `profiles` + RLS, `AuthProvider` + gardes, pages Login/Register/Logout, OAuth providers, intégration UI, RGPD minimal.
+  - Implémentation (long terme, en cours)
+    - Création d’un micro-backend `server/index.js` (Express) pour gérer l’auth avec cookies httpOnly (email + OAuth Google/Apple), endpoints: `/auth/email/signin`, `/auth/email/signup`, `/auth/oauth/:provider`, `/auth/callback`, `/auth/refresh`, `/auth/signout`, `/auth/user`.
+    - Ajout des dépendances: `express`, `cookie-parser`, `cors` et proxy Vite pour `/auth` vers `http://localhost:8787`.
+    - Front: `AuthProvider` (cookies), `PrivateRoute`, `AdminRoute`, page `src/pages/Dashboard.jsx`, intégration route `/dashboard` protégée dans `src/App.jsx`.
+    - Login/Register branchés au backend; boutons OAuth Google/Apple ajoutés.
+    - Correction bug formulaire Register: remplacement `onChange={handleChange}` par `onChange={onChange}` pour les champs password/passwordConfirm.
+    - Correction erreur 500 `/auth/user`: amélioration gestion d’erreur dans `AuthContext.jsx` (parse JSON sécurisé) et requête `profiles` optionnelle dans le serveur (fonctionne même si la table n’existe pas encore).
+    - Création script SQL `server/sql/create-profiles-table.sql` avec table `profiles`, RLS, trigger auto-création profil, fonction création super_admin.
+    - Documentation serveur: `server/README.md` avec configuration, démarrage, dépannage.
+
   - Refactor SOLID (itération 1) et règle « une seule fonction par composant » appliquée aux notifications et à l’authentification.
     - Scission de `src/components/UpdateNotification.jsx` en composants unitaires:
       - `src/components/update/UpdateNotification.jsx` (composant principal)

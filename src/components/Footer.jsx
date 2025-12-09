@@ -14,7 +14,7 @@ const Footer = () => {
             <div className='space-y-1 text-sm mb-6 font-poppins-regular'>
               <a href='tel:0769063469' className='block hover:underline'>+33 7 69 06 34 69</a>
               <a href='mailto:hello.locali@outlook.com' className='block hover:underline'>hello.locali@outlook.com</a>
-              <a href='#' className='block hover:underline font-poppins-medium'>Nous contacter</a>
+              <a href='/contact' className='block hover:underline font-poppins-medium'>Nous contacter</a>
             </div>
 
             {/* Séparateur */}

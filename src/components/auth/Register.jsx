@@ -34,7 +34,7 @@ const Register = () => {
   const [acceptCGU, setAcceptCGU] = useState(false)
   const [acceptNewsletter, setAcceptNewsletter] = useState(false)
 
-  const { handleChange, handleSubmit } = useRegisterHandlers(
+  const { handleChange, handleSubmit, handleRegisterWithGoogle, handleRegisterWithApple } = useRegisterHandlers(
     () => form,
     () => acceptCGU,
     () => acceptNewsletter
@@ -115,7 +115,7 @@ const Register = () => {
             type='password'
             name='password'
             value={form.password}
-            onChange={handleChange}
+            onChange={onChange}
             required
             className='w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base'
             placeholder='Mot de passe'
@@ -124,7 +124,7 @@ const Register = () => {
             type='password'
             name='passwordConfirm'
             value={form.passwordConfirm}
-            onChange={handleChange}
+            onChange={onChange}
             required
             className='w-full px-3 py-2 md:px-4 md:py-3 rounded-lg bg-white border-none shadow font-poppins-regular text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-300 text-sm md:text-base'
             placeholder='Validation du mot de passe'
@@ -164,6 +164,14 @@ const Register = () => {
         >
           S'inscrire
         </button>
+        <div className='w-full flex flex-col gap-2 mb-2'>
+          <button type='button' onClick={handleRegisterWithGoogle} className='w-full bg-white text-gray-800 border border-gray-200 py-2 rounded-lg'>
+            Continuer avec Google
+        </button>
+          <button type='button' onClick={handleRegisterWithApple} className='w-full bg-white text-gray-800 border border-gray-200 py-2 rounded-lg'>
+            Continuer avec Apple
+        </button>
+        </div>
         <Link
           to='/connexion'
           className='block text-green-900 hover:underline font-poppins-medium text-center mt-2 text-sm md:text-base'
