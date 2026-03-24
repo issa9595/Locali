@@ -19,10 +19,14 @@ import CarteTerritoriale from './components/CarteTerritoriale.jsx'
 // import { UpdateNotification } from './components/UpdateNotification.jsx'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import Dashboard from './pages/Dashboard.jsx'
+import { AuthProvider } from './auth/AuthContext.jsx'
+import PrivateRoute from './routes/PrivateRoute.jsx'
 
 function App () {
   return (
     <MainLayout>
+      <AuthProvider>
       {/* Notification de mise à jour automatique - TEMPORAIREMENT DÉSACTIVÉE */}
       {/* <UpdateNotification variant="banner" /> */}
       <Routes>
@@ -41,11 +45,17 @@ function App () {
         <Route path='/connexion' element={<Login />} />
         <Route path='/inscription' element={<Register />} />
         <Route path='/abonnement' element={<WebSubscriptionPage />} />
+        <Route path='/dashboard' element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        } />
         <Route path='*' element={<Web404 />} />
       </Routes>
 
       {/* Notification toast flottante pour les mises à jour - TEMPORAIREMENT DÉSACTIVÉE */}
       {/* <UpdateNotification variant="toast" /> */}
+      </AuthProvider>
     </MainLayout>
   )
 }

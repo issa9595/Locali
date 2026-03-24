@@ -8,7 +8,7 @@ const Login = () => {
   const [acceptCGU, setAcceptCGU] = useState(false)
   const [acceptNewsletter, setAcceptNewsletter] = useState(false)
 
-  const { handleSubmit } = useLoginHandlers({ email, password, acceptCGU, acceptNewsletter })
+  const { handleSubmit, handleLoginWithGoogle, handleLoginWithApple } = useLoginHandlers({ email, password, acceptCGU, acceptNewsletter })
 
   return (
     <section
@@ -68,6 +68,14 @@ const Login = () => {
             Se connecter
           </button>
         </form>
+        <div className='w-full flex flex-col gap-2 mt-2'>
+          <button type='button' onClick={handleLoginWithGoogle} className='w-full bg-white text-gray-800 border border-gray-200 py-2 rounded-lg'>
+            Continuer avec Google
+          </button>
+          <button type='button' onClick={handleLoginWithApple} className='w-full bg-white text-gray-800 border border-gray-200 py-2 rounded-lg'>
+            Continuer avec Apple
+          </button>
+        </div>
         <Link
           to='/inscription'
           className='block text-green-900 hover:underline font-poppins-medium text-center mt-6 text-sm md:text-base'

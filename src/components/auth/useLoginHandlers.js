@@ -1,8 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../auth/AuthContext.jsx'
+
 export default function useLoginHandlers ({ email, password, acceptCGU, acceptNewsletter }) {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+  const { loginEmail, loginWithProvider } = useAuth()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Connexion avec', { email, password, acceptCGU, acceptNewsletter })
+    try {
+      await loginEmail(email, password)
+      navigate('/dashboard')
+    } catch (error) {
+      console.error('Erreur connexion:', error)
+      window.alert(error.message || 'Erreur lors de la connexion')
+    }
   }
 
-  return { handleSubmit }
+  const handleLoginWithGoogle = () => loginWithProvider('google')
+  const handleLoginWithApple = () => loginWithProvider('apple')
+
+  return { handleSubmit, handleLoginWithGoogle, handleLoginWithApple }
 }
