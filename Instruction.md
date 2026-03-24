@@ -80,3 +80,7 @@
 - Les champs du formulaire sont déjà mappés 1:1 avec EmailJS.
 - Un message de feedback utilisateur affiche l’état (succès/erreur).
 
+- 2026-03-24
+  - Footer — ajout du crédit créateur
+    - Mise à jour de `src/components/Footer.jsx` pour ajouter, en bas du footer, un lien externe `Created by MADA-DEV.COM` pointant vers `https://mada-dev.com` (ouverture dans un nouvel onglet, `rel="noopener noreferrer"`).
+

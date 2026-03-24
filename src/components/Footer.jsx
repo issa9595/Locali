@@ -85,6 +85,16 @@ const Footer = () => {
           </div>
 
         </div>
+        <div className='mt-8 pt-4 border-t border-white/20 text-center text-xs font-poppins-regular uppercase tracking-wide'>
+          <a
+            href='https://mada-dev.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='hover:underline'
+          >
+            Created by MADA-DEV.COM
+          </a>
+        </div>
       </div>
     </footer>
   )
